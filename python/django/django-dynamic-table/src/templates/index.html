@@ -1,0 +1,30 @@
+{% load tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dynamic table</title>
+</head>
+<body>
+<table>
+    <thead>
+        <tr>
+            <td></td>
+            {% for fld in flds %}
+                <td>{{ fld.name }}</td>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+{% for rkey, rval in cnt.items %}
+        <tr>
+            <td>{{ rkey }}</td>
+            {% for fld in flds %}
+            <td>{{ rval|get_item:fld.name }}</td>
+            {% endfor %}
+        </tr>
+{% endfor %}
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,8 @@
+Django
+django-cors-headers
+django-rest-swagger
+django-summernote
+djangorestframework
+djangorestframework-jsonapi
+djangorestframework-jwt
+djoser

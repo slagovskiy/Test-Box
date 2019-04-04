@@ -1,0 +1,183 @@
+# Russian translations for PROJECT.
+# Copyright (C) 2016 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2016-01-22 15:23+0600\n"
+"PO-Revision-Date: 2016-01-22 15:42+0600\n"
+"Language: ru\n"
+"Language-Team: ru <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.2.0\n"
+"Last-Translator: \n"
+"X-Generator: Poedit 1.8.6\n"
+
+#: app/views.py:47
+msgid "Your post is now live!"
+msgstr "Ваш пост теперь опубликован!"
+
+#: app/views.py:54 app/templates/base.html:26
+msgid "Home"
+msgstr "Домой"
+
+#: app/views.py:74
+msgid "Sign in"
+msgstr "Войти"
+
+#: app/views.py:83
+msgid "Invalid login. Please try again."
+msgstr "Не верное имя пользователя. Пожалуйста, попробуйте снова."
+
+#: app/views.py:118
+#, python-format
+msgid "User %(name)s not found"
+msgstr "Пользователь %(name)s не найден"
+
+#: app/views.py:137
+msgid "Your changes have been saved."
+msgstr "Ваши изменения были сохранены."
+
+#: app/views.py:150
+#, python-format
+msgid "User %(name)s not found."
+msgstr "Пользователь %(name)s не найден."
+
+#: app/views.py:161
+#, python-format
+msgid "You are now following %(name)s!"
+msgstr "Теперь Вы подписаны на %(name)s!"
+
+#: app/views.py:174
+msgid "You can't unfollow yourself!"
+msgstr "Вы не можете отписаться от себя!"
+
+#: app/views.py:178
+#, python-format
+msgid "Cannot unfollow %(name)s."
+msgstr "Не получается подписаться на %(name)s."
+
+#: app/views.py:182
+#, python-format
+msgid "You have stopped following %(name)s."
+msgstr "Вы отписались от %(name)s."
+
+#: app/templates/404.html:5
+msgid "File Not Found"
+msgstr "Файл не найден"
+
+#: app/templates/500.html:5
+msgid "An unexpected error has occurred"
+msgstr "Произошла неожиданная ошибка"
+
+#: app/templates/500.html:6
+msgid "The administrator has been notified. Sorry for the inconvenience!"
+msgstr "Администратор был уведомлен. Приносим извинения за неудобства!"
+
+#: app/templates/base.html:24
+msgid "microblog"
+msgstr "Микроблог"
+
+#: app/templates/base.html:28
+msgid "Your Profile"
+msgstr "Ваш профиль"
+
+#: app/templates/base.html:29
+msgid "Logout"
+msgstr "Выйти"
+
+#: app/templates/base.html:31
+msgid "Login"
+msgstr "Войти"
+
+#: app/templates/edit.html:5
+msgid "Edit Your Profile"
+msgstr "Редактировать Ваш профиль"
+
+#: app/templates/edit.html:10
+msgid "Your nickname:"
+msgstr "Ваш ник:"
+
+#: app/templates/edit.html:18
+msgid "About yourself:"
+msgstr "О себе:"
+
+#: app/templates/edit.html:23
+msgid "Save Changes"
+msgstr "Сохранить изменения"
+
+#: app/templates/index.html:9
+msgid "Say something:"
+msgstr "Скажите что-то:"
+
+#: app/templates/index.html:19
+msgid "Post!"
+msgstr "Опубликовать!"
+
+#: app/templates/index.html:27 app/templates/user.html:27
+msgid "Newer posts"
+msgstr "Новые сообщения"
+
+#: app/templates/index.html:28 app/templates/user.html:28
+msgid "Older posts"
+msgstr "Старые сообщения"
+
+#: app/templates/login.html:17
+msgid "Please Sign In"
+msgstr "Пожалуйста войдите"
+
+#: app/templates/login.html:20
+msgid "Click on your OpenID provider below:"
+msgstr "Нажмите на поставщика OpenID ниже:"
+
+#: app/templates/login.html:27
+msgid "Or enter your OpenID here:"
+msgstr "Или введите OpenID здесь:"
+
+#: app/templates/login.html:38
+msgid "Remember Me"
+msgstr "Запомни меня"
+
+#: app/templates/login.html:44
+msgid "Sign In"
+msgstr "Войти"
+
+#: app/templates/post.html:7
+#, python-format
+msgid "%(name)s said %(when)s"
+msgstr "%(name)s написал %(when)s"
+
+#: app/templates/search_results.html:5
+msgid "Search results for"
+msgstr "Результаты поиска"
+
+#: app/templates/user.html:8
+msgid "User"
+msgstr "Пользователь"
+
+#: app/templates/user.html:10
+msgid "Last seen on"
+msgstr "Последний раз был"
+
+#: app/templates/user.html:11
+msgid "followers"
+msgstr "друзей"
+
+#: app/templates/user.html:13
+msgid "Edit your profile"
+msgstr "Редактировать профиль"
+
+#: app/templates/user.html:15
+msgid "Follow"
+msgstr "Подписаться"
+
+#: app/templates/user.html:17
+msgid "Unfollow"
+msgstr "Отписаться"

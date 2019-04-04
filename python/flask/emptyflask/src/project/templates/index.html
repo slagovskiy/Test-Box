@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if g.user %}<h1>User: {{ g.user.username }}</h1>{% endif %}
+    <div><img src="/captcha"><form method="post"><input type="text" name="captcha"><input type="submit"></form></div>
+    {% include "upload.html" %}
+{% endblock %}}

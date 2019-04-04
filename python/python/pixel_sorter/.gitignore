@@ -1,0 +1,31 @@
+# Temp files #
+*.pyc
+*~
+img_*.jpg
+result
+__pycache__
+.env
+
+# Project specific
+.env
+tiny_mce
+pip-log.txt
+# settings_local.py
+
+# Packages #
+############
+*.gz
+*.rar
+*.tar
+*.zip
+*.tar.gz
+
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+*.db
+
+# IDE
+.idea

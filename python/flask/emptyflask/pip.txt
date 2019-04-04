@@ -1,0 +1,11 @@
+flask
+flask-login
+flask-bcrypt
+flask-openid
+flask-mail
+sqlalchemy
+flask-sqlalchemy
+sqlalchemy-migrate
+flask-wtf
+flask-babel
+Pillow

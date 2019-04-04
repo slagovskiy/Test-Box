@@ -1,0 +1,36 @@
+{% if g.user.is_authenticated %}
+<form id="upload-form" action="{{ url_for('media.upload') }}" method="POST" enctype="multipart/form-data">
+    <strong>Folders:</strong><br>
+    Select folder.
+    <select name="upload_folder" id="upload_folder">
+        {% for folder in g.user.mediafolders %}
+        <option value="{{ folder.id }}">{{ folder.foldername }}</option>
+        {% endfor %}
+    </select><p>
+
+    <strong>Files:</strong><br>
+    Select files OR drag them into the box below.
+    <input id="file-picker" type="file" name="file" accept="image/*" multiple><p>
+
+    <div id="dropbox">
+        Drag and Drop Files Here
+    </div><p>
+
+    <input type="submit" value="Upload!" id="upload-button">
+</form>
+
+<fieldset id="progress" style="display: none">
+    <legend>Files Progress</legend>
+
+    <div class="progress-trough">
+        <div id="progress-bar" class="progress-bar">0%</div>
+    </div>
+</fieldset>
+
+<script src="/static/js/uploadr.js" rel="script"></script>
+<script>
+    UPLOAD_URL = "{{ url_for('media.upload') }}";
+</script>
+{% else %}
+Only authenticated users can upload files
+{% endif %}

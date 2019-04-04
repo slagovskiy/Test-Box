@@ -1,0 +1,343 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FD5FC4DF-BC77-41EA-8DED-C85FCC820FB3}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TUSUR_DBСP_FilmOCritic</RootNamespace>
+    <AssemblyName>TUSUR_DBСP_FilmOCritic</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>TUSUR_DBСP_FilmOCritic.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>C960856F4051006615FBC519BB03E665D82DB036</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>TUSUR_DBСP_FilmOCritic_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Access, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="frmAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAbout.Designer.cs">
+      <DependentUpon>frmAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCommentAllow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCommentAllow.Designer.cs">
+      <DependentUpon>frmCommentAllow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCommentary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCommentary.Designer.cs">
+      <DependentUpon>frmCommentary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCommentReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCommentReport.Designer.cs">
+      <DependentUpon>frmCommentReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCountry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCountry.Designer.cs">
+      <DependentUpon>frmCountry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCountryEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCountryEdit.Designer.cs">
+      <DependentUpon>frmCountryEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmFilm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFilm.Designer.cs">
+      <DependentUpon>frmFilm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmFilmEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFilmEdit.Designer.cs">
+      <DependentUpon>frmFilmEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmFilmReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFilmReport.Designer.cs">
+      <DependentUpon>frmFilmReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmGenre.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGenre.Designer.cs">
+      <DependentUpon>frmGenre.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmGenreEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGenreEdit.Designer.cs">
+      <DependentUpon>frmGenreEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPerson.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPerson.Designer.cs">
+      <DependentUpon>frmPerson.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPersonEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPersonEdit.Designer.cs">
+      <DependentUpon>frmPersonEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPersonReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPersonReport.Designer.cs">
+      <DependentUpon>frmPersonReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRating.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRating.Designer.cs">
+      <DependentUpon>frmRating.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSettings.Designer.cs">
+      <DependentUpon>frmSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmType.Designer.cs">
+      <DependentUpon>frmType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTypeEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTypeEdit.Designer.cs">
+      <DependentUpon>frmTypeEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUser.Designer.cs">
+      <DependentUpon>frmUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmUserEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUserEdit.Designer.cs">
+      <DependentUpon>frmUserEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Toolbox.cs" />
+    <EmbeddedResource Include="frmAbout.resx">
+      <DependentUpon>frmAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCommentAllow.resx">
+      <DependentUpon>frmCommentAllow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCommentary.resx">
+      <DependentUpon>frmCommentary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCommentReport.resx">
+      <DependentUpon>frmCommentReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCountry.resx">
+      <DependentUpon>frmCountry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCountryEdit.resx">
+      <DependentUpon>frmCountryEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFilm.resx">
+      <DependentUpon>frmFilm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFilmEdit.resx">
+      <DependentUpon>frmFilmEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFilmReport.resx">
+      <DependentUpon>frmFilmReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmGenre.resx">
+      <DependentUpon>frmGenre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmGenreEdit.resx">
+      <DependentUpon>frmGenreEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPerson.resx">
+      <DependentUpon>frmPerson.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPersonEdit.resx">
+      <DependentUpon>frmPersonEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPersonReport.resx">
+      <DependentUpon>frmPersonReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRating.resx">
+      <DependentUpon>frmRating.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSettings.resx">
+      <DependentUpon>frmSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmType.resx">
+      <DependentUpon>frmType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTypeEdit.resx">
+      <DependentUpon>frmTypeEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUser.resx">
+      <DependentUpon>frmUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUserEdit.resx">
+      <DependentUpon>frmUserEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="TUSUR_DBСP_FilmOCritic_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

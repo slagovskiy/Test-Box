@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Empty Flask</title>
+    <link href="/static/css/normalize.min.css" rel="stylesheet">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
+    <script src="/static/js/jquery-2.2.0.min.js" rel="script"></script>
+</head>
+<body>
+    {% include 'flash.html' %}
+    {% block content %}{% endblock %}
+</body>
+</html>

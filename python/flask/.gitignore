@@ -1,0 +1,38 @@
+# Temp files #
+##############
+*.pyc
+*.pot
+*~
+__pycache__
+tmp
+
+# Project specific #
+####################
+.env
+pip-log.txt
+settings_local.py
+config_local.py
+downloads
+
+# Packages #
+############
+*.gz
+*.rar
+*.tar
+*.zip
+*.tar.gz
+
+# Logs and databases #
+######################
+*.log
+logs/*.log.*
+*.sql
+*.sqlite
+*.sqlite3
+*.db
+db_search
+
+# IDE #
+.idea
+projectFilesBackup
+*.iml

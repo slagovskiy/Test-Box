@@ -1,0 +1,17 @@
+# Temp files #
+##############
+*~
+
+# Packages #
+############
+*.gz
+*.rar
+*.tar
+*.zip
+*.tar.gz
+
+# IDE #
+.idea
+projectFilesBackup
+
+DATA

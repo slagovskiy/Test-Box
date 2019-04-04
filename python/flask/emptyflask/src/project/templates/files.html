@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block context %}
+<a href="{{ url_for('index') }}">Back to front page</a><p>
+
+{% for file in files %}
+    <h2>{{ file }}</h2>
+    <img src="{{ url_for('static', filename='uploads/{}/{}'.format(uuid, file)) }}">
+{% endfor %}
+{% endblock %}
