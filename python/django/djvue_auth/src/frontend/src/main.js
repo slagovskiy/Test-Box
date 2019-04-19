@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Vuelidate from 'vuelidate'
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
 import Axios from 'axios'
+
 import App from './App.vue'
 import store from './store/index'
 import router from './routes'
@@ -15,6 +19,8 @@ if (accessToken) {
 }
 
 Vue.use(VueRouter)
+Vue.use(Vuetify)
+Vue.use(Vuelidate)
 
 Vue.config.productionTip = false
 

@@ -2,6 +2,8 @@ import VueRouter from 'vue-router'
 import Home from './views/Home'
 import User from './views/User/User'
 import Login from './views/User/Login'
+import Register from './views/User/Register'
+import ChangePassword from './views/User/ChangePassword'
 import Error404 from './views/Error'
 
 /*
@@ -17,29 +19,29 @@ const Cars = resolve => {
 export default new VueRouter({
     routes: [
         {
-            path: '',
-            component: Home
+            path: '/',
+            component: Home,
+            name: 'home'
         },
         {
-            path: '/user/:name',
+            path: '/user',
             component: User,
-            name: 'user',
-            children: [
-                {
-                    path: 'login',
-                    component: Login,
-                    name: 'user-login',
-                    beforeEnter(to, from, next) {
-                        next()
-                        /*
-                        if (true) {
-                            next(true)
-                        } else {
-                            next(false)
-                        }*/
-                    }
-                },
-            ]
+            name: 'user'
+        },
+        {
+            path: '/user/login',
+            component: Login,
+            name: 'user-login'
+        },
+        {
+            path: '/user/register',
+            component: Register,
+            name: 'user-register'
+        },
+        {
+            path: '/user/password',
+            component: ChangePassword,
+            name: 'user-password'
         },
         {
             path: '*',

@@ -4,7 +4,7 @@
             <v-flex xs12 sm8 md6>
                 <v-card class="elevation-12">
                     <v-toolbar dark color="primary">
-                        <v-toolbar-title>Login form</v-toolbar-title>
+                        <v-toolbar-title>Registration form</v-toolbar-title>
                     </v-toolbar>
                     <v-card-text>
                         <v-form v-model="valid" ref="form" lazy-validation>
@@ -19,11 +19,17 @@
                                     v-bind:counter="6"
                                     v-bind:rules="passwordRules"
                             ></v-text-field>
+                            <v-text-field
+                                    id="confirmPassword" prepend-icon="lock" name="confirmPassword" label="Confirm Password" type="password"
+                                    v-model="confirmPassword"
+                                    v-bind:counter="6"
+                                    v-bind:rules="confirmPasswordRules"
+                            ></v-text-field>
                         </v-form>
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="primary" v-on:click.prevent="onSubmit" v-bind:disabled="!valid">Login</v-btn>
+                        <v-btn color="primary" v-on:click.prevent="onSubmit" v-bind:disabled="!valid">Register</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-flex>
@@ -36,12 +42,13 @@
     var reEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     export default {
-        name: "Login",
-        data(){
+        name: "Register",
+        data() {
             return {
                 valid: false,
                 email: '',
                 password: '',
+                confirmPassword: '',
                 emailRules: [
                     v => !!v || 'E-mail is required',
                     v => reEmail.test(v) || 'E-mail must be valid'
@@ -49,6 +56,10 @@
                 passwordRules: [
                     v => !!v || 'Password is required',
                     v => (v && v.length >= 6) || 'Password must be equal or more than 6 characters'
+                ],
+                confirmPasswordRules: [
+                    v => !!v || 'Password is required',
+                    v => v===this.password || 'Password should match'
                 ]
             }
         },
@@ -60,11 +71,12 @@
                         email: this.email,
                         password: this.password
                     };
-                    this.$store.dispatch('loginUser', user)
+                    this.$store.dispatch('registerUser', user)
                     */
                 }
             }
         }
+
     }
 </script>
 
