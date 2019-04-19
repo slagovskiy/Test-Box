@@ -30,7 +30,7 @@
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="primary" v-on:click.prevent="onSubmit" v-bind:disabled="!valid">Register</v-btn>
+                        <v-btn color="primary" v-on:click.prevent="onSubmit" v-bind:disabled="!valid">Change</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-flex>

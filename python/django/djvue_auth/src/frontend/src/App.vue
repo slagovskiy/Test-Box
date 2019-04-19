@@ -56,25 +56,25 @@
                     {
                         icon: 'lock',
                         title: 'Login',
-                        link: '/user/login',
+                        link: this.$router.resolve({name: 'user-login'}).href,
                         auth: false
                     },
                     {
                         icon: 'person_add',
                         title: 'Registration',
-                        link: '/user/register',
+                        link: this.$router.resolve({name: 'user-register'}).href,
                         auth: false
                     },
                     {
                         icon: 'vpn_key',
                         title: 'Change password',
-                        link: '/user/password',
+                        link: this.$router.resolve({name: 'user-password'}).href,
                         auth: true
                     },
                     {
                         icon: 'exit_to_app',
                         title: 'Logout',
-                        link: '/user/logout',
+                        link: this.$router.resolve({name: 'user-logout'}).href,
                         auth: true
                     },
                 ]

@@ -4,6 +4,7 @@ import User from './views/User/User'
 import Login from './views/User/Login'
 import Register from './views/User/Register'
 import ChangePassword from './views/User/ChangePassword'
+import RestorePassword from './views/User/RestorePassword'
 import Error404 from './views/Error'
 
 /*
@@ -42,6 +43,11 @@ export default new VueRouter({
             path: '/user/password',
             component: ChangePassword,
             name: 'user-password'
+        },
+        {
+            path: '/user/restore',
+            component: RestorePassword,
+            name: 'user-restore'
         },
         {
             path: '*',
