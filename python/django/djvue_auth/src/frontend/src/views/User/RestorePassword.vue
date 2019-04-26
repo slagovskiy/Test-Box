@@ -10,7 +10,7 @@
                         <v-form v-model="valid" ref="form" lazy-validation>
                             <p>Enter your email address to get a temporary password.</p>
                             <v-text-field
-                                    id="email" prepend-icon="person" name="email" label="Email" type="text"
+                                    id="email" prepend-icon="fa-user" name="email" label="Email" type="text"
                                     v-model="email"
                                     v-bind:rules="emailRules"
                             ></v-text-field>
@@ -28,7 +28,7 @@
 
 <script>
     // eslint-disable-next-line
-    var reEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var reEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
     export default {
         name: "RestorePassword",

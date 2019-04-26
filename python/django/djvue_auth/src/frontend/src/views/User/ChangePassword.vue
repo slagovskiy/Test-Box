@@ -9,19 +9,19 @@
                     <v-card-text>
                         <v-form v-model="valid" ref="form" lazy-validation>
                             <v-text-field
-                                    id="oldpassword" prepend-icon="lock" name="oldpassword" label="Old password" type="password"
+                                    id="oldpassword" prepend-icon="fa-unlock" name="oldpassword" label="Old password" type="password"
                                     v-model="oldPassword"
                                     v-bind:counter="6"
                                     v-bind:rules="passwordRules"
                             ></v-text-field>
                             <v-text-field
-                                    id="password" prepend-icon="lock" name="password" label="Password" type="password"
+                                    id="password" prepend-icon="fa-lock" name="password" label="Password" type="password"
                                     v-model="password"
                                     v-bind:counter="6"
                                     v-bind:rules="passwordRules"
                             ></v-text-field>
                             <v-text-field
-                                    id="confirmPassword" prepend-icon="lock" name="confirmPassword" label="Confirm Password" type="password"
+                                    id="confirmPassword" prepend-icon="fa-lock" name="confirmPassword" label="Confirm Password" type="password"
                                     v-model="confirmPassword"
                                     v-bind:counter="6"
                                     v-bind:rules="confirmPasswordRules"
@@ -39,6 +39,9 @@
 </template>
 
 <script>
+    // eslint-disable-next-line
+    var reEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
     export default {
         name: "ChangePassword",
         data() {
@@ -53,7 +56,7 @@
                 ],
                 confirmPasswordRules: [
                     v => !!v || 'Password is required',
-                    v => v===this.password || 'Password should match'
+                    v => v === this.password || 'Password should match'
                 ]
             }
         },

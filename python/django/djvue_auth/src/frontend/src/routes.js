@@ -35,6 +35,11 @@ export default new VueRouter({
             name: 'user-login'
         },
         {
+            path: '/user/logout',
+            component: Login,
+            name: 'user-logout'
+        },
+        {
             path: '/user/register',
             component: Register,
             name: 'user-register'
