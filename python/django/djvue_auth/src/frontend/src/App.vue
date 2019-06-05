@@ -43,6 +43,23 @@
             </v-container>
         </v-content>
         <v-footer app></v-footer>
+        <v-snackbar
+            v-model="messageShow"
+            :bottom="false"
+            :left="false"
+            :multi-line="false"
+            :right="true"
+            :timeout="5000"
+            :top="true"
+            :vertical="false"
+        >{{ messageText }}
+            <v-btn
+                flat
+                v-on:click="snackbar = false"
+            >
+                Close
+            </v-btn>
+        </v-snackbar>
     </v-app>
 </template>
 
@@ -52,6 +69,8 @@
         data() {
             return {
                 drawer: false,
+                snackbar: false,
+                snackbar_text: "",
                 menu: [
                     {
                         icon: 'fa-sign-in-alt',
@@ -81,7 +100,19 @@
             }
         },
         components: {},
-        computed: {}
+        computed: {
+            messageShow: {
+                get() {
+                    return this.$store.getters.floatMessageShow
+                },
+                set(){}
+            },
+            messageText: {
+                get() {
+                    return this.$store.getters.floatMessageText
+                }
+            }
+        }
     }
 </script>
 

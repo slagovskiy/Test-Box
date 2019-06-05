@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'djvue_auth.userext',
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
@@ -120,18 +121,23 @@ USE_L10N = True
 USE_TZ = True
 
 
+AUTH_USER_MODEL = 'userext.User'
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
 
 
-CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = (
     # TODO - set this properly for production
     'http://127.0.0.1:8080',
     'http://127.0.0.1:8000',
+    'http://localhost:8080',
+    'http://localhost:8000',
 )
 
 REST_FRAMEWORK = {
