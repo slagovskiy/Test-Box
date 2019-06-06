@@ -56,15 +56,12 @@
         methods: {
             onSubmit() {
                 if (this.$refs.form.validate()) {
-                    this.$store.dispatch('showMessage', 'qwerty')
-                    /*
                     var user = {
                         'email': this.email,
                         'password': this.password
                     }
                     console.log(user)
                     this.$store.dispatch('login', user)
-                    */
                 }
             },
             restorePassword() {

@@ -69,6 +69,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -121,13 +122,36 @@ USE_L10N = True
 USE_TZ = True
 
 
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USER_EMAIL_FIELD = 'email'
+ACCOUNT_LOGOUT_ON_GET = True
+
 AUTH_USER_MODEL = 'userext.User'
+
+REST_AUTH_SERIALIZERS = {
+    "USER_DETAILS_SERIALIZER": "userext.serializers.UserSerializer",
+}
+
+#REST_AUTH_REGISTER_SERIALIZERS = {
+#    "REGISTER_SERIALIZER": "users.serializers.CustomRegisterSerializer",
+#}
+
+#https://dev.to/callmetarush/the-django-rest-custom-user-model-and-authentication-5go9
+
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 
 CORS_ORIGIN_ALLOW_ALL = True

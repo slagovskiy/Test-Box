@@ -6,24 +6,23 @@ export default {
     state: {
         authUser: {},
         isAuthenticated: false,
-        jwt: localStorage.getItem('token'),
+        jwt: localStorage.getItem('jwt_token'),
     },
     mutations: {
         auth_success() {
 
+        },
+        updateToken(store, token) {
+            store.jwt = token
+            localStorage.setItem('jwt_token', token)
         }
 
     },
     actions: {
         login({commit}, payload) {
-            //console.log('action')
-            //console.log(apiUrl.getToken)
-            //console.log(payload)
-            axios.post(apiUrl.getJWT, payload)
+            axios.post(apiUrl.getToken, payload)
                 .then((response) => {
-                    localStorage.setItem('token', response.data.token)
-                    //console.log(response.data.token)
-                    //this.$store.commit('updateToken', response.data.token)
+                    this.$store.commit('updateToken', response.data.token)
                     /*
                     const base = {
                         baseURL: this.$store.state.endpoints.baseUrl,

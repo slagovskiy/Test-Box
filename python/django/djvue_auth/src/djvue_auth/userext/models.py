@@ -5,8 +5,46 @@ from django.db import models
 import uuid
 import os
 
+from ..settings import MEDIA_ROOT
+
 
 class UserManager(BaseUserManager):
+    '''
+        use_in_migrations = True
+
+    def create_user(self, email, name, date_of_birth, password=None):
+        user = self.model(
+            email=self.normalize_email(email),
+            date_of_birth=date_of_birth,
+            name=name,
+        )
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_staffuser(self, email, name, date_of_birth, password):
+        user = self.create_user(
+            email,
+            password=password,
+            date_of_birth=date_of_birth,
+            name=name,
+        )
+        user.staff = True
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, name, date_of_birth, password):
+        user = self.create_user(
+            email,
+            password=password,
+            date_of_birth=date_of_birth,
+            name= "True",
+        )
+        user.staff = True
+        user.admin = True
+        user.save(using=self._db)
+        return user
+    '''
     def create_user(self, email, password=None):
         if not email:
             raise ValueError('Not a valid email address!')
@@ -31,7 +69,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     def avatar_path(instance, filename):
         ext = filename.split('.')[-1]
         filename = '{}.{}'.format(str(uuid.uuid1()), ext)
-        return os.path.join(os.path.join(instance.email, 'avatar'), filename)
+        return os.path.join(os.path.join('avatar', instance.email), filename)
 
     email = models.EmailField(
         'Email',
