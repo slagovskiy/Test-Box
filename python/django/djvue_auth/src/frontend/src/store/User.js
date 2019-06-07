@@ -4,13 +4,14 @@ import apiUrl from '../common/api'
 
 export default {
     state: {
-        authUser: {},
+        User: {},
         isAuthenticated: false,
         jwt: localStorage.getItem('jwt_token'),
     },
     mutations: {
-        auth_success() {
-
+        setUser(store, payload) {
+            store.User = payload.user
+            store.isAuthenticated = payload.isAuthenticated
         },
         updateToken(store, token) {
             store.jwt = token
@@ -19,35 +20,11 @@ export default {
 
     },
     actions: {
-        login({commit}, payload) {
+        login({commit, dispatch}, payload) {
             axios.post(apiUrl.getToken, payload)
                 .then((response) => {
-                    this.$store.commit('updateToken', response.data.token)
-                    /*
-                    const base = {
-                        baseURL: this.$store.state.endpoints.baseUrl,
-                        headers: {
-                            // Set your Authorization to 'JWT', not Bearer!!!
-                            Authorization: `JWT ${this.$store.state.jwt}`,
-                            'Content-Type': 'application/json'
-                        },
-                        xhrFields: {
-                            withCredentials: true
-                        }
-                    }
-                    const axiosInstance = axios.create(base)
-                    axiosInstance({
-                        url: "/user/",
-                        method: "get",
-                        params: {}
-                    })
-                        .then((response) => {
-                            this.$store.commit("setAuthUser",
-                                {authUser: response.data, isAuthenticated: true}
-                            )
-                            this.$router.push({name: 'Home'})
-                        })
-                    */
+                    commit('updateToken', response.data.token)
+                    dispatch('autoLogin')
                 })
                 /*
                 .catch((error) => {
@@ -58,8 +35,44 @@ export default {
                 })
                 */
         },
+        autoLogin({commit}) {
+            if (this.getters.jwt!='') {
+                const base = {
+                    // baseURL: '',
+                    headers: {
+                        Authorization: 'JWT ' + this.getters.jwt,
+                        'Content-Type': 'application/json'
+                    },
+                    xhrFields: {
+                        withCredentials: true
+                    }
+                }
+                const axiosInstance = axios.create(base)
+                axiosInstance({
+                    url: apiUrl.userInfo,
+                    method: "get",
+                    params: {}
+                })
+                    .then((response) => {
+                        commit("setUser",
+                            {user: response.data.data[0], isAuthenticated: true}
+                        )
+                    })
+                    .catch(() => {
+                        commit('updateToken', '')
+                    })
+            }
+        }
     },
     getters: {
-        isAuthenticated: state => !!state.token
+        isAuthenticated (state) {
+            return state.isAuthenticated
+        },
+        jwt(state) {
+            return state.jwt
+        },
+        user(state) {
+            return state.User
+        }
     }
 }

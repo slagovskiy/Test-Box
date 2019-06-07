@@ -8,6 +8,7 @@ import '@fortawesome/fontawesome-free/css/all.css'
 import App from './App.vue'
 import store from './store/index'
 import router from './routes'
+import config from './common/config'
 
 
 Vue.use(VueRouter)
@@ -28,8 +29,13 @@ Vue.use(Vuelidate)
 
 Vue.config.productionTip = false
 
+Vue.prototype.$config = config
+
 new Vue({
     render: h => h(App),
     store: store,
-    router: router
+    router: router,
+    created() {
+        this.$store.dispatch('autoLogin')
+    }
 }).$mount('#app')

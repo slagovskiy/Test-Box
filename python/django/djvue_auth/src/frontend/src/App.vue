@@ -2,6 +2,11 @@
     <v-app>
         <v-navigation-drawer app temporary v-model="drawer">
             <v-list>
+                <v-list-tile>
+                    <v-list-tile-content>
+                        {{this.$store.getters.user.email}}
+                    </v-list-tile-content>
+                </v-list-tile>
                 <v-list-tile
                     v-for="item in menu"
                     v-bind:key="item.title"
@@ -27,14 +32,30 @@
                 </router-link>
             </v-toolbar-title>
             <v-spacer></v-spacer>
+            <v-toolbar-title>
+                <v-avatar
+                size="36px"
+                >
+                    <img
+                        v-if="user.avatar"
+                        v-bind:src="this.$config.BASE_URL + user.avatar"
+                        v-bind:alt="user.email"
+                    >
+                </v-avatar>
+                {{user.email}}
+            </v-toolbar-title>
             <v-toolbar-items class="hidden-sm-and-down">
+                <template
+                    v-for="item in menu"
+                >
                 <v-btn flat
-                       v-for="item in menu"
                        v-bind:key="item.title"
                        v-bind:to="item.link"
+                       v-if="item.auth === isAuthenticated"
                 >
                     <v-icon left>{{item.icon}}</v-icon>{{item.title}}
                 </v-btn>
+                </template>
             </v-toolbar-items>
         </v-toolbar>
         <v-content>
@@ -111,6 +132,18 @@
                 get() {
                     return this.$store.getters.floatMessageText
                 }
+            },
+            isAuthenticated: {
+                get() {
+                    return this.$store.getters.isAuthenticated
+                },
+                set() {}
+            },
+            user: {
+                get() {
+                    return this.$store.getters.user
+                },
+                set() {}
             }
         }
     }

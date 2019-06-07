@@ -7,13 +7,14 @@ from .serializers import UserSerializer
 
 
 class APIUser(APIView):
-    #permission_classes = [permissions.IsAuthenticated,]
-    permission_classes = [permissions.AllowAny,]
+    permission_classes = [permissions.IsAuthenticated,]
+    # permission_classes = [permissions.AllowAny,]
 
     def get(self, request):
-        email = request.GET.get('email')
+        # email = request.GET.get('email')
+        email = request.user.email
         user = User.objects.filter(email=email)
-        serializer = UserSerializer(user, many=False)
+        serializer = UserSerializer(user, many=True)
         return Response({
             'data': serializer.data
         })

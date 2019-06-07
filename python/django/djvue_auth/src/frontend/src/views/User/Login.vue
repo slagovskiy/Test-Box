@@ -60,9 +60,12 @@
                         'email': this.email,
                         'password': this.password
                     }
-                    console.log(user)
                     this.$store.dispatch('login', user)
-                }
+                        .then(() => {
+                            this.$router.push('/')
+                        })
+                        .catch(() => {})
+                    }
             },
             restorePassword() {
                 this.$router.push({name: 'user-restore'});
