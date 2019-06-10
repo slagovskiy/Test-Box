@@ -1,25 +1,37 @@
 export default {
     state: {
-        _floatMessageShow: false,
-        _floatMessageText: ''
+        loading: false,
+        error: null
     },
     mutations: {
-        showMessage(state, payload){
-            state._floatMessageShow = true
-            state._floatMessageText = payload
+        setLoading(state, payload) {
+            state.loading = payload
+        },
+        setError(state, payload) {
+            state.error = payload
+        },
+        clearError(state) {
+            state.error = null
         }
     },
     actions: {
-        showMessage(state, payload) {
-            state.commit('showMessage', payload)
+        setLoading({commit}, payload) {
+            commit('setLoading', payload)
+        },
+        setError({commit}, payload) {
+            commit('setError', payload)
+        },
+        clearError({commit}) {
+            commit('clearError')
         }
     },
     getters: {
-        floatMessageShow(state){
-            return state._floatMessageShow
+        loading(state) {
+            return state.loading
         },
-        floatMessageText(state){
-            return state._floatMessageText
+        error(state) {
+            return state.error
         }
     }
 }
+

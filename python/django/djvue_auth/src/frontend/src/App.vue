@@ -4,21 +4,25 @@
             <v-list>
                 <v-list-tile>
                     <v-list-tile-content>
-                        {{this.$store.getters.user.email}}
+                        {{user.email}}
                     </v-list-tile-content>
                 </v-list-tile>
-                <v-list-tile
+                <template
                     v-for="item in menu"
-                    v-bind:key="item.title"
-                    v-bind:to="item.link"
                 >
-                    <v-list-tile-action>
-                        <v-icon>{{item.icon}}</v-icon>
-                    </v-list-tile-action>
-                    <v-list-tile-content>
-                        <v-list-tile-title>{{item.title}}</v-list-tile-title>
-                    </v-list-tile-content>
-                </v-list-tile>
+                    <v-list-tile
+                        v-bind:key="item.title"
+                        v-bind:to="item.link"
+                        v-if="item.auth === isAuthenticated"
+                    >
+                        <v-list-tile-action>
+                            <v-icon>{{item.icon}}</v-icon>
+                        </v-list-tile-action>
+                        <v-list-tile-content>
+                            <v-list-tile-title>{{item.title}}</v-list-tile-title>
+                        </v-list-tile-content>
+                    </v-list-tile>
+                </template>
             </v-list>
         </v-navigation-drawer>
         <v-toolbar app dark color="primary">
@@ -32,9 +36,9 @@
                 </router-link>
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-toolbar-title>
+            <v-toolbar-title class="toolbar-text hidden-sm-and-down">
                 <v-avatar
-                size="36px"
+                    size="36px"
                 >
                     <img
                         v-if="user.avatar"
@@ -48,13 +52,14 @@
                 <template
                     v-for="item in menu"
                 >
-                <v-btn flat
-                       v-bind:key="item.title"
-                       v-bind:to="item.link"
-                       v-if="item.auth === isAuthenticated"
-                >
-                    <v-icon left>{{item.icon}}</v-icon>{{item.title}}
-                </v-btn>
+                    <v-btn flat
+                           v-bind:key="item.title"
+                           v-bind:to="item.link"
+                           v-if="item.auth === isAuthenticated"
+                    >
+                        <v-icon left>{{item.icon}}</v-icon>
+                        {{item.title}}
+                    </v-btn>
                 </template>
             </v-toolbar-items>
         </v-toolbar>
@@ -64,29 +69,27 @@
             </v-container>
         </v-content>
         <v-footer app></v-footer>
-        <v-snackbar
-            v-model="messageShow"
-            :bottom="false"
-            :left="false"
-            :multi-line="false"
-            :right="true"
-            :timeout="5000"
-            :top="true"
-            :vertical="false"
-        >{{ messageText }}
-            <v-btn
-                flat
-                v-on:click="snackbar = false"
+        <template v-if="error">
+            <v-snackbar
+                v-bind:timeout="5000"
+                v-bind:multi-line="true"
+                color="error"
+                v-on:input="closeError"
+                v-bind:value="true"
             >
-                Close
-            </v-btn>
-        </v-snackbar>
+                {{error}}
+                <v-btn flat dark v-on:lick.native="closeError">Close</v-btn>
+            </v-snackbar>
+        </template>
     </v-app>
 </template>
 
 <script>
     export default {
         name: 'app',
+        created() {
+
+        },
         data() {
             return {
                 drawer: false,
@@ -121,29 +124,20 @@
             }
         },
         components: {},
+        methods: {
+            closeError () {
+                this.$store.dispatch('clearError')
+            },
+        },
         computed: {
-            messageShow: {
-                get() {
-                    return this.$store.getters.floatMessageShow
-                },
-                set(){}
+            error () {
+                return this.$store.getters.error
             },
-            messageText: {
-                get() {
-                    return this.$store.getters.floatMessageText
-                }
+            isAuthenticated() {
+                return this.$store.getters.isAuthenticated
             },
-            isAuthenticated: {
-                get() {
-                    return this.$store.getters.isAuthenticated
-                },
-                set() {}
-            },
-            user: {
-                get() {
-                    return this.$store.getters.user
-                },
-                set() {}
+            user() {
+                return this.$store.getters.user
             }
         }
     }
@@ -152,5 +146,13 @@
 <style>
     .pointer {
         cursor: pointer;
+    }
+
+    .toolbar-text {
+        padding-left: 10px;
+        padding-right: 10px;
+        font-weight: 400;
+        font-size: 14px;
+        text-transform: uppercase;
     }
 </style>

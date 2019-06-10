@@ -1,71 +1,96 @@
-import axios from 'axios'
-import apiUrl from '../common/api'
+import api from '../common/api'
 
+const initState = {
+    User: {},
+    isAuthenticated: false,
+    jwt: localStorage.getItem('jwt_token'),
+}
 
 export default {
-    state: {
-        User: {},
-        isAuthenticated: false,
-        jwt: localStorage.getItem('jwt_token'),
-    },
+    initState: initState,
+    state: initState,
     mutations: {
         setUser(store, payload) {
             store.User = payload.user
             store.isAuthenticated = payload.isAuthenticated
         },
         updateToken(store, token) {
-            store.jwt = token
-            localStorage.setItem('jwt_token', token)
+            if (token != '' && token != null) {
+                store.jwt = token
+                localStorage.setItem('jwt_token', token)
+                api.http.defaults.headers.common['Authorization'] = 'JWT ' + this.getters.jwt
+            } else {
+                localStorage.removeItem('jwt_token')
+                api.http.defaults.headers.common['Authorization'] = ''
+            }
         }
 
     },
     actions: {
-        login({commit, dispatch}, payload) {
-            axios.post(apiUrl.getToken, payload)
-                .then((response) => {
-                    commit('updateToken', response.data.token)
-                    dispatch('autoLogin')
-                })
-                /*
-                .catch((error) => {
-
-                    //console.log(error);
-                    //console.debug(error);
-                    //console.dir(error);
-                })
-                */
+        logout({commit}) {
+            commit('clearError')
+            commit('updateToken', '')
+            commit('setUser', {'user': {}, 'isAuthenticated': false})
         },
-        autoLogin({commit}) {
-            if (this.getters.jwt!='') {
-                const base = {
-                    // baseURL: '',
-                    headers: {
-                        Authorization: 'JWT ' + this.getters.jwt,
-                        'Content-Type': 'application/json'
-                    },
-                    xhrFields: {
-                        withCredentials: true
+        login({commit, dispatch}, payload) {
+            commit('clearError')
+            commit('setLoading', true)
+            api.http.post(api.getToken, payload)
+                .then(
+                    (response) => {
+                        commit('updateToken', response.data.token)
+                        dispatch('autoLogin')
+                    })
+                .catch((error) => {
+                    if (error.response.status===400) {
+                        commit('setError', 'Wrong username or password.')
+                        commit('setLoading', false)
                     }
-                }
-                const axiosInstance = axios.create(base)
-                axiosInstance({
-                    url: apiUrl.userInfo,
-                    method: "get",
-                    params: {}
+                    else if (error.response.status===500) {
+                        commit('setError', 'Error on server, please, try again later.')
+                        commit('setLoading', false)
+                    }
+                    else {
+                        commit('setError', 'Something going wrong. ' + error.response.statusText)
+                        commit('setLoading', false)
+                    }
                 })
+        },
+        autoLogin: function ({commit}) {
+            commit('clearError')
+            commit('setLoading', true)
+            if (this.getters.jwt != null && this.getters.jwt != '') {
+                api.http.defaults.headers.common['Authorization'] = 'JWT ' + this.getters.jwt
+                api.http.get(api.userInfo, {})
                     .then((response) => {
                         commit("setUser",
                             {user: response.data.data[0], isAuthenticated: true}
                         )
+                        commit('setLoading', false)
                     })
-                    .catch(() => {
+                    .catch((error) => {
                         commit('updateToken', '')
+                        if (error.response.status === 401) {
+                            commit('setError', 'Session time out. Please, login again.')
+                            commit('setLoading', false)
+                            throw error
+                        } else if (error.response.status === 500) {
+                            commit('setError', 'Error on server, please, try again later.')
+                            commit('setLoading', false)
+                            throw error
+                        } else {
+                            commit('setError', 'Something going wrong. ' + error.response.statusText)
+                            commit('setLoading', false)
+                            throw error
+                        }
                     })
+            } else {
+                commit('setLoading', false)
             }
         }
     },
     getters: {
-        isAuthenticated (state) {
+        isAuthenticated(state) {
             return state.isAuthenticated
         },
         jwt(state) {

@@ -2,6 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Vuelidate from 'vuelidate'
 import Vuetify from 'vuetify'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
 import 'vuetify/dist/vuetify.min.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 
@@ -26,6 +29,7 @@ Vue.use(Vuetify, {
     }
 })
 Vue.use(Vuelidate)
+Vue.use(VueAxios, axios)
 
 Vue.config.productionTip = false
 

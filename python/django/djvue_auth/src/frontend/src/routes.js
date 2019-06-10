@@ -2,6 +2,7 @@ import VueRouter from 'vue-router'
 import Home from './views/Home'
 import User from './views/User/User'
 import Login from './views/User/Login'
+import Logout from './views/User/Logout'
 import Register from './views/User/Register'
 import ChangePassword from './views/User/ChangePassword'
 import RestorePassword from './views/User/RestorePassword'
@@ -36,7 +37,7 @@ export default new VueRouter({
         },
         {
             path: '/user/logout',
-            component: Login,
+            component: Logout,
             name: 'user-logout'
         },
         {

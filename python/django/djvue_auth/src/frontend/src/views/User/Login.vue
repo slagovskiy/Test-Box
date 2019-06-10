@@ -24,7 +24,11 @@
                     <v-card-actions>
                         <v-btn flat color="primary" v-on:click="restorePassword">Forgot your password?</v-btn>
                         <v-spacer></v-spacer>
-                        <v-btn color="primary" v-on:click.prevent="onSubmit" v-bind:disabled="!valid">Login</v-btn>
+                        <v-btn color="primary"
+                               v-on:click.prevent="onSubmit"
+                               v-bind:disabled="!valid"
+                               v-on:loading="loading"
+                        >Login</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-flex>
@@ -41,8 +45,8 @@
         data(){
             return {
                 valid: false,
-                email: '',
-                password: '',
+                email: 'slagovskiy@gmail.com',
+                password: '123qwe',
                 emailRules: [
                     v => !!v || 'E-mail is required',
                     v => reEmail.test(v) || 'E-mail must be valid'
@@ -53,6 +57,11 @@
                 ]
             }
         },
+        computed: {
+            loading () {
+                return this.$store.getters.loading
+            }
+        },
         methods: {
             onSubmit() {
                 if (this.$refs.form.validate()) {
@@ -60,11 +69,14 @@
                         'email': this.email,
                         'password': this.password
                     }
-                    this.$store.dispatch('login', user)
+                    this.$store
+                        .dispatch('login', user)
                         .then(() => {
-                            this.$router.push('/')
+                            if (this.$store.getters.isAuthenticated) {
+                                this.$router.push('/')
+                            }
                         })
-                        .catch(() => {})
+                        .catch(() => {});
                     }
             },
             restorePassword() {
