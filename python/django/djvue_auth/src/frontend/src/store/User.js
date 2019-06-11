@@ -32,25 +32,22 @@ export default {
             commit('updateToken', '')
             commit('setUser', {'user': {}, 'isAuthenticated': false})
         },
-        login({commit, dispatch}, payload) {
+        login({commit}, payload) {
             commit('clearError')
             commit('setLoading', true)
-            api.http.post(api.getToken, payload)
+            return api.http.post(api.getToken, payload)
                 .then(
                     (response) => {
                         commit('updateToken', response.data.token)
-                        dispatch('autoLogin')
                     })
                 .catch((error) => {
-                    if (error.response.status===400) {
+                    if (error.response.status === 400) {
                         commit('setError', 'Wrong username or password.')
                         commit('setLoading', false)
-                    }
-                    else if (error.response.status===500) {
+                    } else if (error.response.status === 500) {
                         commit('setError', 'Error on server, please, try again later.')
                         commit('setLoading', false)
-                    }
-                    else {
+                    } else {
                         commit('setError', 'Something going wrong. ' + error.response.statusText)
                         commit('setLoading', false)
                     }
@@ -61,7 +58,7 @@ export default {
             commit('setLoading', true)
             if (this.getters.jwt != null && this.getters.jwt != '') {
                 api.http.defaults.headers.common['Authorization'] = 'JWT ' + this.getters.jwt
-                api.http.get(api.userInfo, {})
+                return api.http.get(api.userInfo, {})
                     .then((response) => {
                         commit("setUser",
                             {user: response.data.data[0], isAuthenticated: true}
@@ -73,15 +70,12 @@ export default {
                         if (error.response.status === 401) {
                             commit('setError', 'Session time out. Please, login again.')
                             commit('setLoading', false)
-                            throw error
                         } else if (error.response.status === 500) {
                             commit('setError', 'Error on server, please, try again later.')
                             commit('setLoading', false)
-                            throw error
                         } else {
                             commit('setError', 'Something going wrong. ' + error.response.statusText)
                             commit('setLoading', false)
-                            throw error
                         }
                     })
             } else {

@@ -27,7 +27,7 @@
                         <v-btn color="primary"
                                v-on:click.prevent="onSubmit"
                                v-bind:disabled="!valid"
-                               v-on:loading="loading"
+                               v-bind:loading="loading"
                         >Login</v-btn>
                     </v-card-actions>
                 </v-card>
@@ -69,11 +69,13 @@
                         'email': this.email,
                         'password': this.password
                     }
-                    this.$store
-                        .dispatch('login', user)
+                    this.$store.dispatch('login', user)
                         .then(() => {
-                            if (this.$store.getters.isAuthenticated) {
-                                this.$router.push('/')
+                            if (this.$store.getters.jwt) {
+                                this.$store.dispatch('autoLogin')
+                                    .then(() => {
+                                        this.$router.push('/')
+                                    })
                             }
                         })
                         .catch(() => {});
