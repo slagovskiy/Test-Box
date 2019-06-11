@@ -28,12 +28,12 @@ export default {
     },
     actions: {
         logout({commit}) {
-            commit('clearError')
+            commit('clearMessages')
             commit('updateToken', '')
             commit('setUser', {'user': {}, 'isAuthenticated': false})
         },
         login({commit}, payload) {
-            commit('clearError')
+            commit('clearMessages')
             commit('setLoading', true)
             return api.http.post(api.getToken, payload)
                 .then(
@@ -53,8 +53,31 @@ export default {
                     }
                 })
         },
+        changePassword({commit}, payload) {
+            commit('clearMessages')
+            commit('setLoading', true)
+            return api.http.put(api.userPassword, payload)
+                .then(
+                    () => {
+                        commit('setMessage', 'Password has been successfully changed.')
+                        commit('setLoading', false)
+                    })
+                .catch((error) => {
+                    if (error.response.status === 400) {
+                        commit('setError', 'Wrong password.')
+                        commit('setLoading', false)
+                    } else if (error.response.status === 500) {
+                        commit('setError', 'Error on server, please, try again later.')
+                        commit('setLoading', false)
+                    } else {
+                        commit('setError', 'Something going wrong. ' + error.response.statusText)
+                        commit('setLoading', false)
+                    }
+                })
+        },
         autoLogin: function ({commit}) {
-            commit('clearError')
+            console.log('autologin - start')
+            commit('clearMessages')
             commit('setLoading', true)
             if (this.getters.jwt != null && this.getters.jwt != '') {
                 api.http.defaults.headers.common['Authorization'] = 'JWT ' + this.getters.jwt
@@ -64,6 +87,7 @@ export default {
                             {user: response.data.data[0], isAuthenticated: true}
                         )
                         commit('setLoading', false)
+                        console.log('autologin - ok')
                     })
                     .catch((error) => {
                         commit('updateToken', '')

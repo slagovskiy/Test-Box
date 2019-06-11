@@ -36,19 +36,20 @@
                 </router-link>
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-toolbar-title class="toolbar-text hidden-sm-and-down">
-                <v-avatar
-                    size="36px"
-                >
-                    <img
-                        v-if="user.avatar"
-                        v-bind:src="this.$config.BASE_URL + user.avatar"
-                        v-bind:alt="user.email"
-                    >
-                </v-avatar>
-                {{user.email}}
-            </v-toolbar-title>
             <v-toolbar-items class="hidden-sm-and-down">
+                <v-btn flat
+                    v-bind:to="this.$router.resolve({name: 'user-profile'}).href"
+
+                >
+                    <v-avatar size="36px">
+                        <img
+                            v-if="user.avatar"
+                            v-bind:src="this.$config.BASE_URL + user.avatar"
+                            v-bind:alt="user.email"
+                        >
+                    </v-avatar>
+                    {{user.email}}
+                </v-btn>
                 <template
                     v-for="item in menu"
                 >
@@ -74,11 +75,23 @@
                 v-bind:timeout="5000"
                 v-bind:multi-line="true"
                 color="error"
-                v-on:input="closeError"
+                v-on:input="closeMessages"
                 v-bind:value="true"
             >
                 {{error}}
-                <v-btn flat dark v-on:lick.native="closeError">Close</v-btn>
+                <v-btn flat dark v-on:lick.native="closeMessages">Close</v-btn>
+            </v-snackbar>
+        </template>
+        <template v-if="message">
+            <v-snackbar
+                v-bind:timeout="5000"
+                v-bind:multi-line="true"
+                color="primary"
+                v-on:input="closeMessages"
+                v-bind:value="true"
+            >
+                {{message}}
+                <v-btn flat dark v-on:lick.native="closeMessages">Close</v-btn>
             </v-snackbar>
         </template>
     </v-app>
@@ -103,6 +116,12 @@
                         auth: false
                     },
                     {
+                        icon: 'fa-sign-in-alt',
+                        title: 'Login',
+                        link: this.$router.resolve({name: 'user-login'}).href,
+                        auth: true
+                    },
+                    {
                         icon: 'fa-user',
                         title: 'Registration',
                         link: this.$router.resolve({name: 'user-register'}).href,
@@ -115,6 +134,12 @@
                         auth: true
                     },
                     {
+                        icon: 'fa-key',
+                        title: 'Change password',
+                        link: this.$router.resolve({name: 'user-password'}).href,
+                        auth: false
+                    },
+                    {
                         icon: 'fa-sign-out-alt',
                         title: 'Logout',
                         link: this.$router.resolve({name: 'user-logout'}).href,
@@ -125,13 +150,16 @@
         },
         components: {},
         methods: {
-            closeError () {
-                this.$store.dispatch('clearError')
+            closeMessages() {
+                this.$store.dispatch('clearMessages')
             },
         },
         computed: {
-            error () {
+            error() {
                 return this.$store.getters.error
+            },
+            message() {
+                return this.$store.getters.message
             },
             isAuthenticated() {
                 return this.$store.getters.isAuthenticated

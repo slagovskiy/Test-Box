@@ -15,6 +15,7 @@ import config from './common/config'
 
 
 Vue.use(VueRouter)
+
 Vue.use(Vuetify, {
     iconfont: 'fa',
     theme: {
@@ -28,18 +29,43 @@ Vue.use(Vuetify, {
 
     }
 })
+
 Vue.use(Vuelidate)
 Vue.use(VueAxios, axios)
 
 Vue.config.productionTip = false
-
 Vue.prototype.$config = config
+
+
 
 new Vue({
     render: h => h(App),
     store: store,
     router: router,
     created() {
+        router.beforeEach((to, from, next) => {
+            if (to.matched.some(record => record.meta.requiresAuth)) {
+                if (!this.$store.getters.isAuthenticated) {
+                    next({
+                        path: this.$router.resolve({name: 'user-login'}).href,
+                        query: {redirect: to.fullPath}
+                    })
+                } else {
+                    next()
+                }
+            } else if (to.matched.some(record => record.meta.requiresNoAuth)) {
+                if (this.$store.getters.isAuthenticated) {
+                    next({
+                        path: this.$router.resolve({name: 'user-profile'}).href
+                    })
+                } else {
+                    next()
+                }
+            } else {
+                next()
+            }
+        })
+
         this.$store.dispatch('autoLogin')
     }
 }).$mount('#app')

@@ -1,7 +1,10 @@
 from django.urls import path
-from .views import APIUser
+from django.conf.urls import url
+from .views import APIUser, APIChangePassword, APIUploadAvatar
 
 
 urlpatterns = [
-    path('', APIUser.as_view()),
+    url('password/', APIChangePassword.as_view()),
+    url('avatar/', APIUploadAvatar.as_view()),
+    url('', APIUser.as_view()),
 ]

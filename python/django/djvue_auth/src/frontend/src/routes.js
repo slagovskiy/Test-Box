@@ -8,15 +8,6 @@ import ChangePassword from './views/User/ChangePassword'
 import RestorePassword from './views/User/RestorePassword'
 import Error404 from './views/Error'
 
-/*
-const Cars = resolve => {
-    require.ensure(['./pages/Cars.vue'], () => {
-        resolve(
-            require('./pages/Cars')
-        )
-    })
-}
-*/
 
 export default new VueRouter({
     routes: [
@@ -26,34 +17,40 @@ export default new VueRouter({
             name: 'home'
         },
         {
-            path: '/user',
+            path: '/user/profile',
             component: User,
-            name: 'user'
+            name: 'user-profile',
+            meta: {requiresAuth: true}
         },
         {
             path: '/user/login',
             component: Login,
-            name: 'user-login'
+            name: 'user-login',
+            meta: {requiresNoAuth: true}
         },
         {
             path: '/user/logout',
             component: Logout,
-            name: 'user-logout'
+            name: 'user-logout',
+            meta: {requiresAuth: true}
         },
         {
             path: '/user/register',
             component: Register,
-            name: 'user-register'
+            name: 'user-register',
+            meta: {requiresNoAuth: true}
         },
         {
             path: '/user/password',
             component: ChangePassword,
-            name: 'user-password'
+            name: 'user-password',
+            meta: {requiresAuth: true}
         },
         {
             path: '/user/restore',
             component: RestorePassword,
-            name: 'user-restore'
+            name: 'user-restore',
+            meta: {requiresNoAuth: true}
         },
         {
             path: '*',
@@ -61,11 +58,11 @@ export default new VueRouter({
         }
     ],
     mode: 'history',
-    scrollBehavior (to, from, savedPosition) {
+    scrollBehavior(to, from, savedPosition) {
         if (savedPosition) {
             return savedPosition
         }
-        if(to.hash) {
+        if (to.hash) {
             return {selector: to.hash}
         }
         return {

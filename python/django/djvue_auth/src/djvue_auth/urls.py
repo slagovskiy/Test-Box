@@ -28,7 +28,7 @@ urlpatterns = [
     # The rest of the endpoints
     #url(r'^api/v1/', include('project.api', namespace='apiv1')),
 
-    url('api/v1/user/', include('djvue_auth.userext.urls')),
+    url(r'^api/v1/user/', include('djvue_auth.userext.urls')),
 
     path('admin/', admin.site.urls),
 ]

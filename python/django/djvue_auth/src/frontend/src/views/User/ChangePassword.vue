@@ -15,13 +15,13 @@
                                     v-bind:rules="passwordRules"
                             ></v-text-field>
                             <v-text-field
-                                    id="password" prepend-icon="fa-lock" name="password" label="Password" type="password"
+                                    id="password" prepend-icon="fa-lock" name="password" label="New password" type="password"
                                     v-model="password"
                                     v-bind:counter="6"
                                     v-bind:rules="passwordRules"
                             ></v-text-field>
                             <v-text-field
-                                    id="confirmPassword" prepend-icon="fa-lock" name="confirmPassword" label="Confirm Password" type="password"
+                                    id="confirmPassword" prepend-icon="fa-lock" name="confirmPassword" label="Confirm New password" type="password"
                                     v-model="confirmPassword"
                                     v-bind:counter="6"
                                     v-bind:rules="confirmPasswordRules"
@@ -30,7 +30,11 @@
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="primary" v-on:click.prevent="onSubmit" v-bind:disabled="!valid">Change</v-btn>
+                        <v-btn color="primary"
+                               v-on:click.prevent="onSubmit"
+                               v-bind:disabled="!valid"
+                               v-bind:loading="loading"
+                        >Change</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-flex>
@@ -60,18 +64,25 @@
                 ]
             }
         },
+        computed: {
+            loading() {
+                return this.$store.getters.loading
+            }
+        },
         methods: {
             onSubmit() {
                 if (this.$refs.form.validate()) {
-                    /*
-                    const data = {
-                        oldPassword: this.oldPassword,
-                        password: this.password
-                    };
-                    this.$store.dispatch('changePasswordUser', data)
-                    */
-                }
-            }
+                    var data = {
+                        'old_password': this.oldPassword,
+                        'new_password': this.password
+                    }
+                    this.$store.dispatch('changePassword', data)
+                        .then(() => {
+                            this.$router.push({'name': 'user-profile'})
+                        })
+                        .catch(() => {});
+                    }
+            },
         }
     }
 </script>

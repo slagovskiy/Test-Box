@@ -9,15 +9,15 @@
                     <v-card-text>
                         <v-form v-model="valid" ref="form" lazy-validation>
                             <v-text-field
-                                    id="email" prepend-icon="fa-user" name="email" label="Email" type="text"
-                                    v-model="email"
-                                    v-bind:rules="emailRules"
+                                id="email" prepend-icon="fa-user" name="email" label="Email" type="text"
+                                v-model="email"
+                                v-bind:rules="emailRules"
                             ></v-text-field>
                             <v-text-field
-                                    id="password" prepend-icon="fa-lock" name="password" label="Password" type="password"
-                                    v-model="password"
-                                    v-bind:counter="6"
-                                    v-bind:rules="passwordRules"
+                                id="password" prepend-icon="fa-lock" name="password" label="Password" type="password"
+                                v-model="password"
+                                v-bind:counter="6"
+                                v-bind:rules="passwordRules"
                             ></v-text-field>
                         </v-form>
                     </v-card-text>
@@ -28,7 +28,8 @@
                                v-on:click.prevent="onSubmit"
                                v-bind:disabled="!valid"
                                v-bind:loading="loading"
-                        >Login</v-btn>
+                        >Login
+                        </v-btn>
                     </v-card-actions>
                 </v-card>
             </v-flex>
@@ -42,7 +43,7 @@
 
     export default {
         name: "Login",
-        data(){
+        data() {
             return {
                 valid: false,
                 email: 'slagovskiy@gmail.com',
@@ -58,7 +59,10 @@
             }
         },
         computed: {
-            loading () {
+            isAuthenticated(state) {
+                return state.isAuthenticated
+            },
+            loading() {
                 return this.$store.getters.loading
             }
         },
@@ -74,12 +78,16 @@
                             if (this.$store.getters.jwt) {
                                 this.$store.dispatch('autoLogin')
                                     .then(() => {
-                                        this.$router.push('/')
+                                        if(this.$route.query['redirect'])
+                                            this.$router.push(this.$route.query['redirect'])
+                                        else
+                                            this.$router.push({name: 'user-profile'})
                                     })
                             }
                         })
-                        .catch(() => {});
-                    }
+                        .catch(() => {
+                        });
+                }
             },
             restorePassword() {
                 this.$router.push({name: 'user-restore'});
