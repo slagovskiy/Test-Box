@@ -176,6 +176,10 @@
         cursor: pointer;
     }
 
+    .uppercase {
+        text-transform: uppercase;
+    }
+
     .toolbar-text {
         padding-left: 10px;
         padding-right: 10px;

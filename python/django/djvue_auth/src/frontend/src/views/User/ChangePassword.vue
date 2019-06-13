@@ -1,6 +1,6 @@
 <template>
     <v-container fluid fill-height>
-        <v-layout align-center justify-center>
+        <v-layout align-center justify-center v-if="isAuthenticated">
             <v-flex xs12 sm8 md6>
                 <v-card class="elevation-12">
                     <v-toolbar dark color="primary">
@@ -39,6 +39,16 @@
                 </v-card>
             </v-flex>
         </v-layout>
+        <v-layout v-else>
+            <v-flex xs12>
+                    <v-alert
+                      v-bind:value="true"
+                      type="error"
+                    >
+                      Access denied!
+                    </v-alert>
+            </v-flex>
+        </v-layout>
     </v-container>
 </template>
 
@@ -67,6 +77,9 @@
         computed: {
             loading() {
                 return this.$store.getters.loading
+            },
+            isAuthenticated() {
+                return this.$store.getters.isAuthenticated
             }
         },
         methods: {

@@ -1,6 +1,6 @@
 <template>
     <v-container grid-list-md fill-height>
-        <v-layout row wrap>
+        <v-layout row wrap v-if="isAuthenticated">
             <v-flex xs4>
                 <v-card>
                     <template v-if="user.avatar">
@@ -19,22 +19,24 @@
                 <template>
                     <v-layout row justify-center>
                         <v-dialog v-model="dialogAvatar" persistent max-width="290">
-                            <v-card>
-                                <v-card-title class="headline">Select image</v-card-title>
-                                <v-card-text class="text-md-center">
-                                    <img
-                                        v-bind:src="imageUrl"
-                                        height="125px"
-                                        v-if="imageUrl"
-                                    />
-                                    <v-text-field
-                                        label="Select Image"
-                                        v-on:click='pickFile'
-                                        v-model='imageName'
-                                        prepend-icon='attach_file'
-                                        ref="imageText"
-                                    ></v-text-field>
-                                    <form ref="form-avatar" method="post" id="form-avatar" enctype="multipart/form-data">
+                            <v-form v-model="validAvatar" ref="formAvatar" lazy-validation
+                                    enctype="multipart/form-data">
+                                <v-card>
+                                    <v-card-title class="headline">Select image</v-card-title>
+                                    <v-card-text class="text-md-center">
+                                        <img
+                                            v-bind:src="imageUrl"
+                                            height="125px"
+                                            v-if="imageUrl"
+                                        />
+                                        <v-text-field
+                                            label="Select Image"
+                                            v-on:click='pickFile'
+                                            v-model='imageName'
+                                            v-bind:rules="avatarRules"
+                                            prepend-icon='attach_file'
+                                            ref="imageText"
+                                        ></v-text-field>
                                         <input
                                             name="file"
                                             type="file"
@@ -43,22 +45,60 @@
                                             accept="image/*"
                                             v-on:change="onFilePicked"
                                         >
-                                    </form>
-                                </v-card-text>
-                                <v-card-actions>
-                                    <v-spacer></v-spacer>
-                                    <v-btn color="" v-on:click="dialogAvatar = false">Cancel</v-btn>
-                                    <v-btn color="primary" v-on:click="uploadAvatar" v-bind:loading="loading">Upload</v-btn>
-                                </v-card-actions>
-                            </v-card>
+                                    </v-card-text>
+                                    <v-card-actions>
+                                        <v-spacer></v-spacer>
+                                        <v-btn color="" v-on:click="dialogAvatar = false">Cancel</v-btn>
+                                        <v-btn
+                                            color="primary"
+                                            v-on:click.prevent="uploadAvatar"
+                                            v-bind:loading="loading"
+                                            v-bind:disabled="!validAvatar"
+                                        >Upload
+                                        </v-btn>
+                                    </v-card-actions>
+                                </v-card>
+                            </v-form>
                         </v-dialog>
                     </v-layout>
                 </template>
             </v-flex>
             <v-flex xs8>
                 <v-card>
-                    <v-card-text class="px-0">qwerty</v-card-text>
+                    <v-card-title primary-title>
+                        <h1 class="uppercase">{{user.email}}</h1>
+                    </v-card-title>
+                    <v-card-text class="">
+                        <v-text-field
+                            v-model="userFirstname"
+                            label="First name"
+                            required
+                        ></v-text-field>
+                        <v-text-field
+                            v-model="userLastname"
+                            label="Last name"
+                            required
+                        ></v-text-field>
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-btn
+                            color="primary"
+                            v-on:click="saveUser"
+                            v-bind:loading="loading"
+                        >Save
+                        </v-btn>
+                    </v-card-actions>
                 </v-card>
+            </v-flex>
+        </v-layout>
+        <v-layout v-else>
+            <v-flex xs12>
+                <v-alert
+                    v-bind:value="true"
+                    type="error"
+                >
+                    Access denied!
+                </v-alert>
             </v-flex>
         </v-layout>
     </v-container>
@@ -66,15 +106,26 @@
 
 <script>
     import api from '../../common/api'
+
     export default {
         name: "User",
+        mounted() {
+            this.userFirstname = this.user.firstname
+            this.userLastname = this.user.lastname
+        },
         data() {
             return {
+                validAvatar: false,
                 dialogAvatar: false,
                 form: new FormData(),
                 imageName: '',
                 imageUrl: '',
                 imageFile: '',
+                userFirstname: '',
+                userLastname: '',
+                avatarRules: [
+                    v => !!v || 'Image is required'
+                ]
             }
         },
         methods: {
@@ -114,7 +165,7 @@
                     }
                 )
                     .then((response) => {
-                        if(response.data.status=='ok'){
+                        if (response.data.status == 'ok') {
                             this.dialogAvatar = false
                             this.imageFile = ''
                             this.imageName = ''
@@ -127,11 +178,14 @@
                         }
                     })
                     .catch((error) => {
-                        this.$store.dispatch('setError', 'Data transfer error')
+                        this.$store.dispatch('setError', 'Data transfer error. ' + error)
                     })
                     .finally(() => {
                         this.$store.dispatch('setLoading', false)
                     })
+            },
+            saveUser() {
+
             }
         },
         computed: {
@@ -150,5 +204,4 @@
 </script>
 
 <style scoped>
-
 </style>
