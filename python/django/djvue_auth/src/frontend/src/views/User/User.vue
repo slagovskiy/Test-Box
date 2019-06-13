@@ -32,19 +32,23 @@
                                         v-on:click='pickFile'
                                         v-model='imageName'
                                         prepend-icon='attach_file'
+                                        ref="imageText"
                                     ></v-text-field>
-                                    <input
-                                        type="file"
-                                        style="display: none"
-                                        ref="image"
-                                        accept="image/*"
-                                        v-on:change="onFilePicked"
-                                    >
+                                    <form ref="form-avatar" method="post" id="form-avatar" enctype="multipart/form-data">
+                                        <input
+                                            name="file"
+                                            type="file"
+                                            style="display: none"
+                                            ref="image"
+                                            accept="image/*"
+                                            v-on:change="onFilePicked"
+                                        >
+                                    </form>
                                 </v-card-text>
                                 <v-card-actions>
                                     <v-spacer></v-spacer>
                                     <v-btn color="" v-on:click="dialogAvatar = false">Cancel</v-btn>
-                                    <v-btn color="primary" v-on:click="uploadAvatar">Upload</v-btn>
+                                    <v-btn color="primary" v-on:click="uploadAvatar" v-bind:loading="loading">Upload</v-btn>
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
@@ -90,7 +94,8 @@
                     fr.addEventListener('load', () => {
                         this.imageUrl = fr.result
                         this.imageFile = files[0]
-                        this.form.append('files', files[0], files[0].name)
+                        this.form.append('file', this.$refs.image.files[0])
+                        this.form.append('filename', this.imageName)
                     })
                 } else {
                     this.imageName = ''
@@ -99,8 +104,7 @@
                 }
             },
             uploadAvatar() {
-
-                for (var d of this.form) console.log(d)
+                this.$store.dispatch('setLoading', true)
                 api.http.post(api.userAvatar,
                     this.form,
                     {
@@ -109,12 +113,25 @@
                         }
                     }
                 )
-                    .then(function () {
-                        console.log('SUCCESS!!');
+                    .then((response) => {
+                        if(response.data.status=='ok'){
+                            this.dialogAvatar = false
+                            this.imageFile = ''
+                            this.imageName = ''
+                            this.imageUrl = ''
+                            this.form = new FormData()
+                            this.$store.dispatch('autoLogin')
+                                .then(() => {
+                                    this.$store.dispatch('setMessage', 'Avatar is updated.')
+                                })
+                        }
                     })
-                    .catch(function () {
-                        console.log('FAILURE!!');
-                    });
+                    .catch((error) => {
+                        this.$store.dispatch('setError', 'Data transfer error')
+                    })
+                    .finally(() => {
+                        this.$store.dispatch('setLoading', false)
+                    })
             }
         },
         computed: {
@@ -123,6 +140,9 @@
             },
             user() {
                 return this.$store.getters.user
+            },
+            loading() {
+                return this.$store.getters.loading
             }
         }
 

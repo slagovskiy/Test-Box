@@ -41,7 +41,7 @@
                     v-bind:to="this.$router.resolve({name: 'user-profile'}).href"
 
                 >
-                    <v-avatar size="36px">
+                    <v-avatar size="36px" class="toolbar-avatar">
                         <img
                             v-if="user.avatar"
                             v-bind:src="this.$config.BASE_URL + user.avatar"
@@ -182,5 +182,9 @@
         font-weight: 400;
         font-size: 14px;
         text-transform: uppercase;
+    }
+
+    .toolbar-avatar {
+        margin-right: 16px;
     }
 </style>

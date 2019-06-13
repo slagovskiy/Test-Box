@@ -76,7 +76,6 @@ export default {
                 })
         },
         autoLogin: function ({commit}) {
-            console.log('autologin - start')
             commit('clearMessages')
             commit('setLoading', true)
             if (this.getters.jwt != null && this.getters.jwt != '') {
@@ -87,7 +86,6 @@ export default {
                             {user: response.data.data[0], isAuthenticated: true}
                         )
                         commit('setLoading', false)
-                        console.log('autologin - ok')
                     })
                     .catch((error) => {
                         commit('updateToken', '')
