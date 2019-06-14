@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework import permissions, status
 from .models import User
 from ..settings import UPLOAD_DIR
-from .serializers import UserSerializer, ChangePasswordSerializer, AvatarSerializer, UserInfoSerializer
+from .serializers import UserSerializer, ChangePasswordSerializer, AvatarSerializer, UserInfoSerializer, NewUserSerializer
 from django.http import JsonResponse, HttpResponse
 
 
@@ -50,7 +50,7 @@ class APIUserRegister(APIView):
             return Response({
                 'status': 'User already register.'
             }, status=status.HTTP_409_CONFLICT)
-        user = UserSerializer(data=data)
+        user = NewUserSerializer(data=data)
         if user.is_valid():
             user.save()
             _user = User.objects.get(email=data['email'])

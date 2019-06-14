@@ -9,6 +9,16 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'email', 'avatar', 'firstname', 'lastname',)
+        read_only_fields = ('email', 'avatar',)
+
+
+class NewUserSerializer(serializers.ModelSerializer):
+    """
+    Serializer for new user
+    """
+    class Meta:
+        model = User
+        fields = ('email', 'password')
 
 
 class ChangePasswordSerializer(serializers.Serializer):
