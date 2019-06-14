@@ -6,7 +6,7 @@
                     <template v-if="user.avatar">
                         <v-img
                             v-bind:src="this.$config.BASE_URL + user.avatar"
-                            height="125px"
+                            height="200px"
                             contain
                         ></v-img>
                     </template>
@@ -45,7 +45,7 @@
                             <v-card-text class="text-md-center">
                                 <img
                                     v-bind:src="imageUrl"
-                                    height="300px"
+                                    height="200px"
                                     v-if="imageUrl"
                                 />
                                 <v-text-field
@@ -86,12 +86,12 @@
                                     label="First name"
                                     v-model="userFirstname"
                                     ref="userFirstname"
-                                />
+                                ></v-text-field>
                                 <v-text-field
                                     label="Last name"
                                     v-model="userLastname"
                                     ref="userLastname"
-                                />
+                                ></v-text-field>
                             </v-card-text>
                             <v-card-actions>
                                 <v-spacer/>
@@ -211,7 +211,7 @@
                     'firstname': this.userFirstname,
                     'lastname': this.userLastname
                 })
-                    .then((response) => {
+                    .then(() => {
                         this.dialogInfo = false
                     })
                     .catch(() => {})

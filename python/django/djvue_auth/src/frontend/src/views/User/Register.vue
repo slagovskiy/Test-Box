@@ -29,7 +29,12 @@
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="primary" v-on:click.prevent="onSubmit" v-bind:disabled="!valid">Register</v-btn>
+                        <v-btn
+                            color="primary"
+                            v-on:click.prevent="onSubmit"
+                            v-bind:disabled="!valid"
+                            v-bind:loading="loading"
+                        >Register</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-flex>
@@ -46,9 +51,9 @@
         data() {
             return {
                 valid: false,
-                email: '',
-                password: '',
-                confirmPassword: '',
+                email: 'sergey@lagovskiy.com',
+                password: '121212',
+                confirmPassword: '121212',
                 emailRules: [
                     v => !!v || 'E-mail is required',
                     v => reEmail.test(v) || 'E-mail must be valid'
@@ -66,14 +71,23 @@
         methods: {
             onSubmit() {
                 if (this.$refs.form.validate()) {
-                    /*
                     const user = {
                         email: this.email,
                         password: this.password
-                    };
+                    }
                     this.$store.dispatch('registerUser', user)
-                    */
+                        .then(() => {
+                            if(!this.$store.getters.error)
+                                this.$router.push({name: 'user-login'})
+                        })
+                        .catch(() => {})
+                        .finally(() => {})
                 }
+            }
+        },
+        computed: {
+            loading() {
+                return this.$store.getters.loading
             }
         }
 

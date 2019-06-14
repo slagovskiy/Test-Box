@@ -25,18 +25,6 @@ class APIUser(APIView):
             'data': serializer.data
         })
 
-    def post(self, request):
-        user = UserSerializer(data=request.data)
-        if user.is_valid():
-            user.save()
-            return Response({
-                'status': 'add'
-            })
-        else:
-            return Response({
-                'status': 'error'
-            })
-
     def put(self, request):
         data = JSONParser().parse(request)
         user = UserSerializer(request.user, data=data)
@@ -52,13 +40,38 @@ class APIUser(APIView):
             })
 
 
+class APIUserRegister(APIView):
+    permission_classes = (permissions.AllowAny,)
+
+    def post(self, request):
+        data = JSONParser().parse(request)
+        _user = User.objects.all().filter(email=data['email'])
+        if _user:
+            return Response({
+                'status': 'User already register.'
+            }, status=status.HTTP_409_CONFLICT)
+        user = UserSerializer(data=data)
+        if user.is_valid():
+            user.save()
+            _user = User.objects.get(email=data['email'])
+            _user.set_password(data['password'])
+            _user.save()
+            return Response({
+                'status': 'ok'
+            }, status=status.HTTP_200_OK)
+        else:
+            return Response({
+                'status': 'Invalid data.'
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+
 class APIChangePassword(UpdateAPIView):
     """
     An endpoint for changing password.
     """
     serializer_class = ChangePasswordSerializer
     model = User
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = [permissions.IsAuthenticated,]
 
     def put(self, request, *args, **kwargs):
         user = request.user
@@ -87,8 +100,8 @@ class APIChangePassword(UpdateAPIView):
 
 
 class APIUploadAvatar(APIView):
-    parser_classes = (MultiPartParser,)
-    permission_classes = (permissions.IsAuthenticated,)
+    parser_classes = [MultiPartParser,]
+    permission_classes = [permissions.IsAuthenticated,]
 
     def post(self, request):
         user = request.user

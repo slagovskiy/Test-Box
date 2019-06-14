@@ -104,16 +104,33 @@ export default {
                 commit('setLoading', false)
             }
         },
-        changeUserInfo: function({commit}, payload) {
+        registerUser: function({commit}, payload) {
+            commit('clearMessages')
             commit('setLoading', true)
-            api.http.put(
+            return api.http.post(
+                api.userRegister,
+                payload
+            )
+                .then(() => {
+                    commit('setMessage', 'User successfully registered')
+                    commit('setLoading', false)
+                })
+                .catch((error) => {
+                    commit('setError', 'User registration failed. ' + error)
+                    commit('setLoading', false)
+                })
+        },
+        changeUserInfo: function({commit}, payload) {
+            commit('clearMessages')
+            commit('setLoading', true)
+            return api.http.put(
                 api.userInfo,
                 payload
             )
                 .then((response) => {
                     if(response.data.status != 'error') {
                         commit('setMessage', 'User info is updated.')
-                        commit("setUser",
+                        commit('setUser',
                             {user: response.data.data, isAuthenticated: true}
                         )
                     } else {
