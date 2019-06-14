@@ -16,52 +16,7 @@
                         <v-spacer/>
                     </v-card-actions>
                 </v-card>
-                <template>
-                    <v-layout row justify-center>
-                        <v-dialog v-model="dialogAvatar" persistent max-width="290">
-                            <v-form v-model="validAvatar" ref="formAvatar" lazy-validation
-                                    enctype="multipart/form-data">
-                                <v-card>
-                                    <v-card-title class="headline">Select image</v-card-title>
-                                    <v-card-text class="text-md-center">
-                                        <img
-                                            v-bind:src="imageUrl"
-                                            height="125px"
-                                            v-if="imageUrl"
-                                        />
-                                        <v-text-field
-                                            label="Select Image"
-                                            v-on:click='pickFile'
-                                            v-model='imageName'
-                                            v-bind:rules="avatarRules"
-                                            prepend-icon='attach_file'
-                                            ref="imageText"
-                                        ></v-text-field>
-                                        <input
-                                            name="file"
-                                            type="file"
-                                            style="display: none"
-                                            ref="image"
-                                            accept="image/*"
-                                            v-on:change="onFilePicked"
-                                        >
-                                    </v-card-text>
-                                    <v-card-actions>
-                                        <v-spacer></v-spacer>
-                                        <v-btn color="" v-on:click="dialogAvatar = false">Cancel</v-btn>
-                                        <v-btn
-                                            color="primary"
-                                            v-on:click.prevent="uploadAvatar"
-                                            v-bind:loading="loading"
-                                            v-bind:disabled="!validAvatar"
-                                        >Upload
-                                        </v-btn>
-                                    </v-card-actions>
-                                </v-card>
-                            </v-form>
-                        </v-dialog>
-                    </v-layout>
-                </template>
+
             </v-flex>
             <v-flex xs8>
                 <v-card>
@@ -69,27 +24,88 @@
                         <h1 class="uppercase">{{user.email}}</h1>
                     </v-card-title>
                     <v-card-text class="">
-                        <v-text-field
-                            v-model="userFirstname"
-                            label="First name"
-                            required
-                        ></v-text-field>
-                        <v-text-field
-                            v-model="userLastname"
-                            label="Last name"
-                            required
-                        ></v-text-field>
+                        <p class="title">First name: <span class="font-weight-light">{{user.firstname}}</span></p>
+                        <p class="title">Last name: <span class="font-weight-light">{{user.lastname}}</span></p>
                     </v-card-text>
                     <v-card-actions>
                         <v-btn
                             color="primary"
-                            v-on:click="saveUser"
-                            v-bind:loading="loading"
-                        >Save
+                            v-on:click="loadUser"
+                        >change info
                         </v-btn>
                     </v-card-actions>
                 </v-card>
             </v-flex>
+            <!-- DIALOGS -->
+            <template>
+                <v-dialog v-model="dialogAvatar" persistent max-width="350">
+                    <v-form ref="formAvatar" enctype="multipart/form-data">
+                        <v-card>
+                            <v-card-title class="headline">Select image</v-card-title>
+                            <v-card-text class="text-md-center">
+                                <img
+                                    v-bind:src="imageUrl"
+                                    height="300px"
+                                    v-if="imageUrl"
+                                />
+                                <v-text-field
+                                    label="Select Image"
+                                    v-on:click='pickFile'
+                                    v-model='imageName'
+                                    prepend-icon='attach_file'
+                                    ref="imageText"
+                                ></v-text-field>
+                                <input
+                                    name="file"
+                                    type="file"
+                                    style="display: none"
+                                    ref="image"
+                                    accept="image/*"
+                                    v-on:change="onFilePicked"
+                                />
+                            </v-card-text>
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn color="" v-on:click="dialogAvatar = false">Cancel</v-btn>
+                                <v-btn
+                                    color="primary"
+                                    v-on:click.prevent="uploadAvatar"
+                                    v-bind:loading="loading"
+                                >Upload
+                                </v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-form>
+                </v-dialog>
+                <v-dialog v-model="dialogInfo" persistent max-width="350">
+                    <v-form v-model="validInfo" ref="formInfo">
+                        <v-card>
+                            <v-card-title class="headline">User info</v-card-title>
+                            <v-card-text class="text-md-center">
+                                <v-text-field
+                                    label="First name"
+                                    v-model="userFirstname"
+                                    ref="userFirstname"
+                                />
+                                <v-text-field
+                                    label="Last name"
+                                    v-model="userLastname"
+                                    ref="userLastname"
+                                />
+                            </v-card-text>
+                            <v-card-actions>
+                                <v-spacer/>
+                                <v-btn color="" v-on:click="dialogInfo = false">Cancel</v-btn>
+                                <v-btn
+                                    color="primary"
+                                    v-on:click.prevent="saveUser"
+                                    v-bind:loading="loading"
+                                >Save</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-form>
+                </v-dialog>
+            </template>
         </v-layout>
         <v-layout v-else>
             <v-flex xs12>
@@ -107,26 +123,25 @@
 <script>
     import api from '../../common/api'
 
+    function initialState() {
+        // Object.assign(this.$data, initialState());
+        return {
+            dialogAvatar: false,
+            dialogInfo: false,
+            validInfo: false,
+            form: new FormData(),
+            imageName: '',
+            imageUrl: '',
+            imageFile: '',
+            userFirstname: '',
+            userLastname: '',
+        }
+    }
+
     export default {
         name: "User",
-        mounted() {
-            this.userFirstname = this.user.firstname
-            this.userLastname = this.user.lastname
-        },
         data() {
-            return {
-                validAvatar: false,
-                dialogAvatar: false,
-                form: new FormData(),
-                imageName: '',
-                imageUrl: '',
-                imageFile: '',
-                userFirstname: '',
-                userLastname: '',
-                avatarRules: [
-                    v => !!v || 'Image is required'
-                ]
-            }
+            return initialState()
         },
         methods: {
             pickFile() {
@@ -156,36 +171,50 @@
             },
             uploadAvatar() {
                 this.$store.dispatch('setLoading', true)
-                api.http.post(api.userAvatar,
-                    this.form,
-                    {
-                        headers: {
-                            'Content-Type': 'multipart/form-data'
+                if (this.$refs.image.files[0] instanceof File) {
+                    api.http.post(api.userAvatar,
+                        this.form,
+                        {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
                         }
-                    }
-                )
-                    .then((response) => {
-                        if (response.data.status == 'ok') {
-                            this.dialogAvatar = false
-                            this.imageFile = ''
-                            this.imageName = ''
-                            this.imageUrl = ''
-                            this.form = new FormData()
-                            this.$store.dispatch('autoLogin')
-                                .then(() => {
-                                    this.$store.dispatch('setMessage', 'Avatar is updated.')
-                                })
-                        }
-                    })
-                    .catch((error) => {
-                        this.$store.dispatch('setError', 'Data transfer error. ' + error)
-                    })
-                    .finally(() => {
-                        this.$store.dispatch('setLoading', false)
-                    })
+                    )
+                        .then((response) => {
+                            if (response.data.status == 'ok') {
+                                Object.assign(this.$data, initialState())
+                                this.$store.dispatch('autoLogin')
+                                    .then(() => {
+                                        this.$store.dispatch('setMessage', 'Avatar is updated.')
+                                        this.dialogInfo = false
+                                    })
+                            }
+                        })
+                        .catch((error) => {
+                            this.$store.dispatch('setError', 'Data transfer error. ' + error)
+                        })
+                        .finally(() => {
+
+                        })
+                } else {
+                    this.$store.dispatch('setError', 'File not selected.')
+                }
+                this.$store.dispatch('setLoading', false)
+            },
+            loadUser() {
+                this.userFirstname = this.user.firstname
+                this.userLastname = this.user.lastname
+                this.dialogInfo = true
             },
             saveUser() {
-
+                this.$store.dispatch('changeUserInfo', {
+                    'firstname': this.userFirstname,
+                    'lastname': this.userLastname
+                })
+                    .then((response) => {
+                        this.dialogInfo = false
+                    })
+                    .catch(() => {})
             }
         },
         computed: {

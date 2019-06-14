@@ -103,6 +103,36 @@ export default {
             } else {
                 commit('setLoading', false)
             }
+        },
+        changeUserInfo: function({commit}, payload) {
+            commit('setLoading', true)
+            api.http.put(
+                api.userInfo,
+                payload
+            )
+                .then((response) => {
+                    if(response.data.status != 'error') {
+                        commit('setMessage', 'User info is updated.')
+                        commit("setUser",
+                            {user: response.data.data, isAuthenticated: true}
+                        )
+                    } else {
+                        commit('setError', 'Error saving data.')
+                    }
+                    commit('setLoading', false)
+                })
+                .catch((error) => {
+                    if (error.response.status === 401) {
+                        commit('setError', 'Session time out. Please, login again.')
+                        commit('setLoading', false)
+                    } else if (error.response.status === 500) {
+                        commit('setError', 'Error on server, please, try again later.')
+                        commit('setLoading', false)
+                    } else {
+                        commit('setError', 'Something going wrong. ' + error.response.statusText)
+                        commit('setLoading', false)
+                    }
+                })
         }
     },
     getters: {

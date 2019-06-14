@@ -20,6 +20,14 @@ class ChangePasswordSerializer(serializers.Serializer):
     new_password = serializers.CharField(required=True)
 
 
+class UserInfoSerializer(serializers.Serializer):
+    """
+    Serializer for user info
+    """
+    firstname = serializers.CharField()
+    lastname = serializers.CharField()
+
+
 class AvatarSerializer(serializers.Serializer):
     """
     Serializer for image
