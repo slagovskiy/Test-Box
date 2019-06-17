@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework import permissions, status
 from .models import User
 from ..settings import UPLOAD_DIR
-from .serializers import UserSerializer, ChangePasswordSerializer, AvatarSerializer, UserInfoSerializer, NewUserSerializer
+from .serializers import UserSerializer, ChangePasswordSerializer, AvatarSerializer, UserInfoSerializer, NewUserSerializer, RestoreUserSerializer
 from django.http import JsonResponse, HttpResponse
 
 
@@ -62,6 +62,28 @@ class APIUserRegister(APIView):
         else:
             return Response({
                 'status': 'Invalid data.'
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+
+class APIUserRestore(APIView):
+    permission_classes = (permissions.AllowAny,)
+
+    def post(self, request):
+        data = JSONParser().parse(request)
+        _user = User.objects.all().filter(email=data['email'])
+        user = RestoreUserSerializer(data=data)
+        if user.is_valid():
+            if _user:
+                return Response({
+                    'status': 'User found.'
+                }, status=status.HTTP_200_OK)
+            else:
+                return Response({
+                    'status': 'User not found.'
+                }, status=status.HTTP_404_NOT_FOUND)
+        else:
+            return Response({
+                'status': 'Wrong email.'
             }, status=status.HTTP_400_BAD_REQUEST)
 
 

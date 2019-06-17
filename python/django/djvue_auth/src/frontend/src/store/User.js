@@ -120,6 +120,22 @@ export default {
                     commit('setLoading', false)
                 })
         },
+        restorePassword: function({commit}, payload) {
+            commit('clearMessages')
+            commit('setLoading', true)
+            return api.http.post(
+                api.userRestore,
+                payload
+            )
+                .then(() => {
+                    commit('setMessage', 'A temporary password has been sent to your email.')
+                    commit('setLoading', false)
+                })
+                .catch(() => {
+                    commit('setError', 'Error sending temporary password.')
+                    commit('setLoading', false)
+                })
+        },
         changeUserInfo: function({commit}, payload) {
             commit('clearMessages')
             commit('setLoading', true)

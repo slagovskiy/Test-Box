@@ -21,6 +21,13 @@ class NewUserSerializer(serializers.ModelSerializer):
         fields = ('email', 'password')
 
 
+class RestoreUserSerializer(serializers.Serializer):
+    """
+    Serializer for restoring user
+    """
+    email = serializers.EmailField(required=True)
+
+
 class ChangePasswordSerializer(serializers.Serializer):
     """
     Serializer for password change

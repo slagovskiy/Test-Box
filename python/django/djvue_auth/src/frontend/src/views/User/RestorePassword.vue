@@ -18,7 +18,7 @@
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="primary" v-on:click.prevent="onSubmit" v-bind:disabled="!valid">Restore</v-btn>
+                        <v-btn color="primary" v-on:click.prevent="onSubmit" v-bind:disabled="!valid" v-bind:loading="loading">Restore</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-flex>
@@ -45,14 +45,23 @@
         methods: {
             onSubmit() {
                 if (this.$refs.form.validate()) {
-                    /*
                     const user = {
-                        email: this.email,
-                        password: this.password
+                        email: this.email
                     };
-                    this.$store.dispatch('registerUser', user)
-                    */
+                    this.$store.dispatch('restorePassword', user)
+                        .then(() => {
+                            if(!this.$store.getters.error)
+                            {
+                                this.$router.push({name: 'user-login'})
+                            }
+                        })
+                        .catch(() => {})
                 }
+            }
+        },
+        computed: {
+            loading() {
+                return this.$store.getters.loading
             }
         }
     }
