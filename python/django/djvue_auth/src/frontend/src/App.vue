@@ -2,13 +2,18 @@
     <v-app>
         <v-navigation-drawer app temporary v-model="drawer">
             <v-list>
-                <v-list-tile>
+                <v-list-tile
+                    v-bind:to="this.$router.resolve({name: 'user-profile'}).href"
+                >
+                    <v-list-tile-action>
+                        <v-icon>fa-user</v-icon>
+                    </v-list-tile-action>
                     <v-list-tile-content>
                         {{user.email}}
                     </v-list-tile-content>
                 </v-list-tile>
                 <template
-                    v-for="item in menu"
+                    v-for="item in mainMenu"
                 >
                     <v-list-tile
                         v-bind:key="item.title"
@@ -38,8 +43,8 @@
             <v-spacer></v-spacer>
             <v-toolbar-items class="hidden-sm-and-down">
                 <v-btn flat
-                    v-bind:to="this.$router.resolve({name: 'user-profile'}).href"
-
+                       v-bind:to="this.$router.resolve({name: 'user-profile'}).href"
+                       v-if="isAuthenticated"
                 >
                     <v-avatar size="36px" class="toolbar-avatar">
                         <img
@@ -51,7 +56,7 @@
                     {{user.email}}
                 </v-btn>
                 <template
-                    v-for="item in menu"
+                    v-for="item in mainMenu"
                 >
                     <v-btn flat
                            v-bind:key="item.title"
@@ -108,44 +113,7 @@
                 drawer: false,
                 snackbar: false,
                 snackbar_text: "",
-                menu: [
-                    {
-                        icon: 'fa-sign-in-alt',
-                        title: 'Login',
-                        link: this.$router.resolve({name: 'user-login'}).href,
-                        auth: false
-                    },
-                    {
-                        icon: 'fa-sign-in-alt',
-                        title: 'Login',
-                        link: this.$router.resolve({name: 'user-login'}).href,
-                        auth: true
-                    },
-                    {
-                        icon: 'fa-user',
-                        title: 'Registration',
-                        link: this.$router.resolve({name: 'user-register'}).href,
-                        auth: false
-                    },
-                    {
-                        icon: 'fa-key',
-                        title: 'Change password',
-                        link: this.$router.resolve({name: 'user-password'}).href,
-                        auth: true
-                    },
-                    {
-                        icon: 'fa-key',
-                        title: 'Change password',
-                        link: this.$router.resolve({name: 'user-password'}).href,
-                        auth: false
-                    },
-                    {
-                        icon: 'fa-sign-out-alt',
-                        title: 'Logout',
-                        link: this.$router.resolve({name: 'user-logout'}).href,
-                        auth: true
-                    },
-                ]
+
             }
         },
         components: {},
@@ -155,6 +123,9 @@
             },
         },
         computed: {
+            mainMenu() {
+                return this.$store.getters.mainMenu
+            },
             error() {
                 return this.$store.getters.error
             },
