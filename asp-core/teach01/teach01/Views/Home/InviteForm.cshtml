@@ -1,0 +1,39 @@
+﻿@model teach01.Models.GuestResponse
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Invite form</title>
+    </head>
+    <body>
+        <div>
+            <form asp-action="InviteForm" method="post">
+                <p>
+                    <label asp-for="Name">Your Name:</label>
+                    <input asp-for="Name" />
+                </p>
+                <p>
+                    <label asp-for="Email">Your Email:</label>
+                    <input asp-for="Email" />
+                </p>
+                <p>
+                    <label asp-for="Phone">Your Phone</label>
+                    <input asp-for="Phone" />
+                </p>
+                <p>
+                    <label asp-for="WillAttend">Will you attend?</label>
+                    <select asp-for="WillAttend">
+                        <option value="">Select...</option>
+                        <option value="true">Yes!</option>
+                        <option value="false">No :(</option>
+                    </select>
+                </p>
+                <button type="submit">Send!</button>
+            </form>
+        </div>
+    </body>
+</html>
+
