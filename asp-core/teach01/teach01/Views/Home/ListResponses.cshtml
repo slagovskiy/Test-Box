@@ -1,0 +1,35 @@
+﻿@model IEnumerable<teach01.Models.GuestResponse>
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>List</title>
+    </head>
+    <body>
+        <h2>ListResponses</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>WillAttend</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (teach01.Models.GuestResponse r in Model) {
+                <tr>
+                    <td>@r.Name</td>
+                    <td>@r.Email</td>
+                    <td>@r.Phone</td>
+                    <td>@r.WillAttend</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        <a asp-action="">Home</a>
+    </body>
+</html>

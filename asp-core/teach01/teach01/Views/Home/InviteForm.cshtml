@@ -7,10 +7,12 @@
 <html>
     <head>
         <title>Invite form</title>
+        <link rel="stylesheet" href="~/css/style.css" />
     </head>
     <body>
         <div>
             <form asp-action="InviteForm" method="post">
+                <div asp-validation-summary="All"></div>
                 <p>
                     <label asp-for="Name">Your Name:</label>
                     <input asp-for="Name" />

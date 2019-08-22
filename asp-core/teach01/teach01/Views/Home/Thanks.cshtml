@@ -1,0 +1,25 @@
+﻿@model teach01.Models.GuestResponse
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Thanks</title>
+    </head>
+    <body>
+        <h1>Thank you @Model.Name</h1>
+        <h2>
+            @if (Model.WillAttend == true)
+            {
+                @:Cool!
+            } else
+            {
+                @:Bad
+            }
+        </h2>
+        <a asp-action="ListResponses">View list</a>
+    </body>
+</html>
+

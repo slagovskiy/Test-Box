@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using teach01.Models;
 
@@ -18,9 +19,24 @@ namespace teach01.Controllers
             return View();
         }
 
-        [HttpPatch]
+        [HttpPost]
         public ViewResult InviteForm(GuestResponse guestResponse) {
+            if (ModelState.IsValid)
+            {
+                Repository.AddResponse(guestResponse);
+                return View("Thanks", guestResponse);
+            } else
+            {
+                return View();
+            }
+        }
+
+        public ViewResult Thanks() {
             return View();
+        }
+
+        public ViewResult ListResponses() {
+            return View(Repository.Responses.Where(r => r.Name != ""));
         }
         
     }
