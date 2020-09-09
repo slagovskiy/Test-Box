@@ -204,14 +204,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eaea24bb-ff5d-412b-96f5-3888ec502be1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/app-header/app-header.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/search-panel/search-panel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/todo-list-item/todo-list-item.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/todo-list/todo-list.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/app-header.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/search-panel.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/todo-list-item.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/todo-list.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
@@ -228,10 +244,20 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="S:\Projects\Nuclear-Test-Site\js\react\todo\src\components\todo-list-item" />
+      <recent name="S:\Projects\Nuclear-Test-Site\js\react\todo\src\components\todo-list" />
+      <recent name="S:\Projects\Nuclear-Test-Site\js\react\todo\src\components\item-status-filter" />
+      <recent name="S:\Projects\Nuclear-Test-Site\js\react\todo\src\components\search-panel" />
+      <recent name="S:\Projects\Nuclear-Test-Site\js\react\todo\src\components\app-header" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
@@ -254,7 +280,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1597999237766</updated>
-      <workItem from="1597999241367" duration="1697000" />
+      <workItem from="1597999241367" duration="7710000" />
+      <workItem from="1599470647813" duration="603000" />
+      <workItem from="1599630161532" duration="12073000" />
     </task>
     <servers />
   </component>
@@ -271,11 +299,32 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="475" y="325" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1599630969537">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="475" y="325" key="#com.intellij.fileTypes.FileTypeChooser/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1599630969537" />
     <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1597999498298">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1597999498298" />
+    <state x="481" y="265" key="FileChooserDialogImpl" timestamp="1599464910807">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="481" y="265" key="FileChooserDialogImpl/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1599464910807" />
+    <state x="83" y="193" key="new project wizard" timestamp="1599464892370">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="83" y="193" key="new project wizard/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1599464892370" />
+    <state x="291" y="244" key="run.anything.popup" timestamp="1599641128028">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="291" y="244" key="run.anything.popup/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1599641128028" />
+    <state x="298" y="230" width="672" height="678" key="search.everywhere.popup" timestamp="1599642637259">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="298" y="230" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1599642637259" />
   </component>
 </project>
