@@ -45,6 +45,26 @@ export default class App extends Component {
         })
     }
 
+    onToggleImportant = (id) => {
+        this.setState(({ todoData }) => {
+            const idx = this.state.todoData.findIndex((el) => el.id === id)
+            const item = {...todoData[idx], important: !todoData[idx].important}
+            return {
+                todoData: [...todoData.slice(0, idx), item, ...todoData.slice(idx + 1)]
+            }
+        })
+    }
+
+    onToggleDone = (id) => {
+        this.setState(({ todoData }) => {
+            const idx = this.state.todoData.findIndex((el) => el.id === id)
+            const item = {...todoData[idx], done: !todoData[idx].done}
+            return {
+                todoData: [...todoData.slice(0, idx), item, ...todoData.slice(idx + 1)]
+            }
+        })
+    }
+
     render() {
         const { todoData } = this.state
 
@@ -56,7 +76,12 @@ export default class App extends Component {
                     <ItemStatusFilter/>
                 </div>
 
-                <TodoList todos={todoData} onDeleted={ this.deleteItem } />
+                <TodoList
+                    todos={todoData}
+                    onDeleted={ this.deleteItem }
+                    onToggleImportant={ this.onToggleImportant }
+                    onToggleDone={ this.onToggleDone }
+                />
                 <ItemAddForm onItemAdded={this.addItem} />
             </div>
         );
