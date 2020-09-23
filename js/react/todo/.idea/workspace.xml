@@ -203,14 +203,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eaea24bb-ff5d-412b-96f5-3888ec502be1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/item-status-filter/item-status-filter.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/item-status-filter/item-status-filter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/search-panel/search-panel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/search-panel/search-panel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/item-add-form/item-add-form.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/item-add-form/item-add-form.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/item-add-form/item-add-form.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/item-add-form/item-add-form.js" afterDir="false" />
-    </list>
+    <list default="true" id="eaea24bb-ff5d-412b-96f5-3888ec502be1" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -238,7 +231,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../star-db" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -278,7 +271,7 @@
       <updated>1597999237766</updated>
       <workItem from="1597999241367" duration="7710000" />
       <workItem from="1599470647813" duration="603000" />
-      <workItem from="1599630161532" duration="21992000" />
+      <workItem from="1599630161532" duration="22656000" />
     </task>
     <servers />
   </component>
@@ -306,10 +299,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1597999498298" />
-    <state x="481" y="265" key="FileChooserDialogImpl" timestamp="1599464910807">
+    <state x="481" y="265" key="FileChooserDialogImpl" timestamp="1600856239820">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="481" y="265" key="FileChooserDialogImpl/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1599464910807" />
+    <state x="481" y="265" key="FileChooserDialogImpl/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600856239820" />
     <state x="202" y="168" key="SettingsEditor" timestamp="1599648652869">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
