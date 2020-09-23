@@ -206,8 +206,10 @@
     <list default="true" id="eaea24bb-ff5d-412b-96f5-3888ec502be1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/todo-list-item/todo-list-item.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/todo-list-item/todo-list-item.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/todo-list/todo-list.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/todo-list/todo-list.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/item-status-filter/item-status-filter.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/item-status-filter/item-status-filter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/search-panel/search-panel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/search-panel/search-panel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/item-add-form/item-add-form.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/item-add-form/item-add-form.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/item-add-form/item-add-form.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/item-add-form/item-add-form.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -276,7 +278,7 @@
       <updated>1597999237766</updated>
       <workItem from="1597999241367" duration="7710000" />
       <workItem from="1599470647813" duration="603000" />
-      <workItem from="1599630161532" duration="13719000" />
+      <workItem from="1599630161532" duration="21992000" />
     </task>
     <servers />
   </component>
